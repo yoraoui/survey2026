@@ -1,0 +1,993 @@
+%Version 3 October 2023
+% See section 11 of the User Manual for version history
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%======================================================%%
+%% to compile with pdflatex/xelatex use pdflatex option %%
+%%======================================================%%
+
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+
+%%Note: the following reference styles support Namedate and Numbered referencing. By default the style follows the most common style. To switch between the options you can add or remove Numbered in the optional parenthesis. 
+%%The option is available for: sn-basic.bst, sn-vancouver.bst, sn-chicago.bst%  
+
+%%\documentclass[sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}% Math and Physical Sciences Numbered Reference Style
+%%\documentclass[sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author Year Reference Style
+%%\documentclass[sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[sn-vancouver,Numbered]{sn-jnl}% Vancouver Reference Style
+%%\documentclass[sn-apa]{sn-jnl}% APA Reference Style 
+%%\documentclass[sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{listings}%
+%%%%
+\usepackage{makecell}
+%added packages
+\usepackage{xcolor}
+\usepackage{caption} % à mettre dans le préambule
+
+\usepackage{subcaption} % à mettre dans le préambule
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{booktabs}
+\usepackage{tocloft}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{lipsum} % for sample text
+
+\setcounter{secnumdepth}{4} % allow numbering down to paragraph
+\renewcommand{\theparagraph}{\alph{paragraph})} % use a), b), c) ...
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+\usepackage{titlesec}
+\titleformat{\subparagraph}[runin] % change [runin] to [block] for newline
+{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+
+\begin{document}
+	
+	\title[Article Title]{A Comprehensive Review of Neural and Neuroscience-Inspired Methods for Robot Navigation}
+	
+	%%=============================================================%%
+	%% GivenName	-> \fnm{Joergen W.}
+	%% Particle	-> \spfx{van der} -> surname prefix
+	%% FamilyName	-> \sur{Ploeg}
+	%% Suffix	-> \sfx{IV}
+	%% \author*[1,2]{\fnm{Joergen W.} \spfx{van der} \sur{Ploeg} 
+		%%  \sfx{IV}}\email{iauthor@gmail.com}
+	%%=============================================================%%
+	
+	\author*[1]{\fnm{Younès} \sur{Raoui}}\email{y.raoui@um5r.ac.ma}
+	
+	\author[2]{\fnm{Cornelius} \sur{Weber}}\email{cornelius.weber@uni-hamburg.de}
+	\equalcont{These authors contributed equally to this work.}
+	
+	\author[2]{\fnm{Stefan} \sur{Wermter}}\email{stefan.wermter@uni-hamburg.de}
+	\equalcont{These authors contributed equally to this work.}
+	
+	\affil*[1]{\orgdiv{Physics Department}, \orgname{Faculty of Sciences, University Mohammed V in Rabat}, \orgaddress{\street{Ibn Battouta}, \city{Rabat}, \postcode{1014},  \country{Morocco}}}
+	
+	\affil[2]{\orgdiv{Knowledge Technology, Department of Informatics}, \orgname{University of Hamburg}, \orgaddress{\street{Vogt-Koelln-Str}, \city{Hamburg}, \postcode{22527},  \country{Germany}}}
+	
+	
+	
+	%%==================================%%
+	%% Sample for unstructured abstract %%
+	%%==================================%%
+	
+	\abstract{In this review, we present a comprehensive survey of neural and neuroscience-inspired robot navigation methods, emphasizing the transition from classical to neural-network-based systems that integrate perception, planning, action, and control in mobile robots. We focus on establishing a comparative review of different neural-based navigation approaches, covering DRL, transformers, foundation models, spatial-cell models, and neural SLAM. In our review, we categorize state-of-the-art methods into the main paradigms — Deep reinforcement learning (DRL)based, neural simultaneous localization and mapping (SLAM), transformer-driven, and bio-inspired spatial-cell models (place cells, grid cells, and head-direction cells). —and then examine their architectures, mechanisms, sensors, and actuators, and their performance, and benchmarks. In addition, we analyze their performance, adaptability, and complexity. We also highlight the emergence of visual-language and event-based systems that enable multimodal perception and reasoning. A detailed comparative analysis shows the strengths and limitations of each approach and reveals a shift toward cognitive, adaptable, and data-efficient navigation models. Finally, we discuss future challenges and research directions, providing an outlook and unified perspective for guiding progress in robot navigation.}
+	
+	
+	
+	\keywords{Neural Robot Navigation, Bio-Inspired Models, Sim-to-Real Transfer, Symbolic and Foundation Model Approaches}
+	
+	%%\pacs[JEL Classification]{D8, H51}
+	
+	%%\pacs[MSC Classification]{35A01, 65L10, 65L12, 65L20, 65L70}
+	
+	\maketitle
+	\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+	\tableofcontents
+	\newpage
+	\section{Introduction}
+	
+	From self-driving cars to autonomous underwater vehicles, autonomous navigation has become an ambitious frontier in robotics and automation that ensures the motion of the robot to achieve a task in an efficient way. The use of new neural network methods represents a paradigm shift to achieve robust perception, planning, and decision-making \cite{rus2024heart} in complex environments. Recent advances in deep learning and data science have enabled multimodal data processing that is adapted to complex applications, going well beyond the capabilities of a range of classical methods. Despite decades of progress in methods of localization, mapping or planning, the geometric rule-based navigation still stumbles in unstructured and uncertain environments.
+	
+	As illustrated in Fig.~\ref{fig:fig1}, navigation architectures are a fusion of several mechanisms of planning that use the positioning of the robot to fix the command necessary to know in a basic perception–action loop, that exploits the SLAM to measure the current pose. Conventional methods typically rely on sensory features that are hard to adapt to dynamic environments or to multimodal data that combines images, language, and video, among other robotic sensors. This limits the solutions of navigation, but the powerful representational capabilities of modern neural architectures are able to make the navigation more natural.
+
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig1.png} % Adjust width as needed
+		\caption{A general architecture of mobile robot navigation (adapted from \cite{Le2024ACR})}
+		\label{fig:fig1}
+	\end{figure}
+	
+
+	Many navigation processes include deep learning methods and data-driven models to make them more reliable and user-friendly. The research in Deep Reinforcement Learning (DRL) methods has influenced planning and trajectory generation through training on modern simulators. The developed patterns have outperformed the classical methods of Proportional–Integral–Derivative (PID) controllers, especially in dynamic environments. The advances in transformer architectures improved target-driven navigation and multimodal perception and place recognition through the attention mechanism. SLAM has also benefited from generative models that create implicit scene representations, synthesizing continuous worlds that help robots navigate safely. In bio-inspired approaches, neural fields effectively model the dynamics of hippocampal place cells and grid cells using continuous attractor networks.
+	
+	
+	Moreover, end-to-end learning is an efficient new approach that connects perception to action without including additional tasks such as mapping or planning. It benefited from advances in the Large Language Models (LLM) and Visual Language Models (VLM) that use textual instructions and visual observations as inputs to the end-to-end models \cite{Lin2023AdvancesIE}. Compared to many robot manipulation tasks, where these models excel, localization and navigation tasks are not fully observable and require memory to store a map. The use of foundation models is suitable and has been extended also to Vision-Language Navigation (VLN) with semantic maps, allowing efficient and more flexible navigation especially when using zero-shot and few-shot generalization. Furthermore, embodied large-language models have also enabled new applications in which robots receive high-level reasoning guidance to navigate effectively in challenging environments \cite{Kant2022HousekeepTV}. This is particularly useful in cluttered settings and low-light conditions, thanks to foundation models enhanced by multimodal fusion of vision, proprioception, and depth, taking advantage of pre-trained models for feature extraction. In particular cases, these new technologies are combined with neuromorphic devices, such as event cameras. They use brain-inspired Spiking Neural Network (SNN) models to compute the necessary velocities to move the robot \cite{Hussaini2023ApplicationsOS, Wu2024EGSSTEG, Zhang2022EventBasedCD}. Foundation models are widely used in the modern techniques of visual place recognition because of their capacity to extract and aggregate features that tackle efficiently the long-standing SLAM challenges of loop closure detection and handling relocalization scenarios.
+	
+	Additionally, the transformer architecture is applied in symbolic navigation to create high-level abstraction methods of planning and scene understanding. The multi-attention is able to provide tokens that characterize semantic features or objects with symbols that make the map \cite{Talbot2020RobotNI, Zhao2024PhysORDAN}.
+	
+	It is worth noting that these advances haven't been achieved without the emergence of a robust simulator ecosystem that adopted the data-driven technologies and datasets that perform tests. The modern simulators are able to conceive new architectures and navigation software tested on datasets, then transferred to real robots with the sim2real technology. It is a good solution to create applications of accurate navigation in complex environments and support important capabilities such as multimodal data processing and domain adaptation, enabling more scalable, safer, and faster navigation development.
+	
+	Additionally, the transformer architecture is applied in symbolic navigation to create high-level abstraction methods of planning and scene understanding. The multi-attention is able to provide tokens that characterize semantic features or objects with symbols that make the map \cite{Talbot2020RobotNI, Zhao2024PhysORDAN}.
+	
+	It is worth noting that existing surveys cover only specific aspects of the field and do not address the complete spectrum of neural or neuroscience-based approaches to robust navigation. In this survey, we present a comprehensive overview of neural methods, including neural-network-based, bio-inspired, and neuroscience-inspired approaches. We fill this gap by reviewing a large body of recent literature, collected through search engines such as Google Scholar and ScienceDirect.
+	
+	
+	\subsection{Summary of Previous Surveys}\label{previoussurvey}
+	
+	Classical robot navigation methods are widely used in mapping, obstacle avoidance, and path planning tasks. The mapping and planning using conventional methods, such as cell decomposition or roadmaps, are addressed in surveys \cite{10.1145/3584376.3584384,10.5555/3535850.3535856}. However, these surveys notably exclude deep learning approaches like Convolutional Neural Networks (CNN) or Reinforcement Learning (RL) techniques.
+	
+	The survey literature also highlights recent proposals for advanced control strategies that go beyond traditional PID-based controllers, especially in tasks such as obstacle avoidance and target follow guided by linguistic instructions \cite{10.1145/3546000.3546033, 10.1145/3036932.3036954}. However, these surveys note that the integration of generative transformer-based models for policy learning or the use of Visual Language Models (VLMs) to generate multi-modal instructions remains largely unexplored.
+	
+	Furthermore, the survey in \cite{Sunbeam2023DeepLF} presents a list of deep learning methods for navigation of autonomous underwater vehicles, but it does not give insight into recent neuro-morphic algorithms exploiting event cameras. Complementary to this, the surveys on nature-inspired navigation are developing approaches of Particle Swarm Optimization (PSO) that mimics bird flocking, or the Artificial Bee Colony (ABC) that is inspired by the foraging behavior of bees \cite{10.1145/3548608.3559177, 10.1145/3708319.3735545}. Yet, these surveys rarely consider bio-inspired methods such as the navigation cells in the hippocampus and medial entorhinal cortex for tasks like mapping, localization, and control.
+	On the other hand, the survey \cite{Yin2022GeneralPR} highlights a comprehensive and detailed review of place recognition techniques in robotics, but it often fails to incorporate event-based place recognition and omits end-to-end approaches. Similarly, a comprehensive survey of deep reinforcement learning methods for navigation across aerial and underwater environments \cite{Tang2024DeepRL} lacks coverage of generative models, including Visual Language Models (VLMs) and Large Language Models (LLMs). In the same vein, a broader SLAM survey provides valuable historical and technical aspects of the Simultaneous Localization and Mapping (SLAM) \cite{Cadena2016PastPA}. In addition, active SLAM, which adds a decision-making process for choosing actions, is conveyed in \cite{Placed2022ASO} by offering also an overview of the deep learning-based approaches. Nevertheless, it does not present the emerging neural scene representation methods of SLAM, such as neural radiance fields for online semantic SLAM (NeRF-SLAM) and iMAP \cite{Rosinol2022NeRFSLAMRD, Sucar2021iMAPIM} that give a paradigm shift, replacing discrete geometric models with continuous world representations.
+	In parallel, broader perspectives on embodied navigation that focus on the body, the sensors, and the actuators delve into the use of LLMs and VLMs for multimodal interactions with users \cite{Lin2023AdvancesIE}, but without presenting new trends that concern neuromorphic devices for navigation.
+	
+	Our work provides an up-to-date overview of neural-based and bio-inspired navigation methods, presenting innovative neural architectures including CNNs, transformers, deep reinforcement learning, and imitation learning agents that offer good solutions to build neural-based applications with high precision and accuracy. It also includes a description of the state of the art of navigation based on VLMs and LLMs with different sensors such as RGBD, event cameras, and LiDARs in various environments.
+	
+	\subsection{Contributions and Paper Organization}\label{contribution}
+	
+	\subsubsection{Contribution}
+	Recent progress in deep learning architectures and robot navigation has driven dynamic evolution in neural robot navigation research. However, no existing survey thoroughly encompasses the diverse aspects of navigation based on neural models. Our survey addresses recent developments in methods related to reinforcement learning, transformers, neuromorphic vision, and bio-inspired spatial coding applied to navigation in different environments of mobile robots, Unmanned Aerial Vehicles, and Autonomous Underwater Vehicles. In addition, we outline some of the technological foundations of robotics that enable sim-to-real transfer methods and tools of scene generation
+	% that implement generative AI concepts.
+	via generative AI.
+	We also present a SOTA of the indoor and outdoor simulators and related datasets. % that are used to exploit them.
+	The transformer architectures appear to be at the center of many navigation systems of visual feature extraction, object detection with event cameras, and navigation with VLM and LLM. We present the main techniques of transformers that we combine with deep reinforcement learning approaches.		
+	Furthermore, we provide a comprehensive overview of bio-inspired neuromorphic perception and navigation methods utilizing event cameras and spiking neural networks, incorporating recent research on brain-inspired navigation approaches. Next, we describe some methods of visual place recognition with foundation models and transformers, followed by the neural-based SLAM methods that incorporate new perception techniques such as Neural Radiance Fields (NeRF).
+	
+	\subsubsection{Paper organization}		
+	The paper %'s organizational architecture, visualized in Fig. 1, proceeds
+	is organized as follows:
+	Section II introduces some technological foundations of neural robot navigation, including sim-to-real transfer (Section \ref{sim2real}) and some influential simulators and datasets (\ref{simulators}).
+	Section III reviews the end-to-end navigation with DRL (\ref{drl}), Transformers (\ref{transformers}), and VLM (\ref{vlm}). 
+	Section IV reviews symbolic and graph-based approaches.
+	Section V presents the SOTA on neuromorphic perception and navigation that is divided into two subsections of navigation with event cameras (\ref{event}) and with place cells, grid cells, and head direction cells (\ref{pcgchdc}). 
+	Finally, in Section VI, we explore NeRF-SLAM (\ref{nerf}) and learning based localization (\ref{localization}).
+	The overall structure of this survey is summarized in Fig.~\ref{fig:fig0}, which illustrates the logical progression from neural architectures of navigation to advanced neural-based SLAM systems.
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig0.png} % Adjust width as needed
+		\caption{Structure of this survey}
+		\label{fig:fig0}
+	\end{figure}
+	
+	\section{Technological Foundations}
+	Real robots operate in complex, noisy, and unpredictable environments, with collected data from real sensors and actuators reflecting real-world properties. Yet, data-hungry learning algorithms benefit from learning a navigation policy in simulation before using sim-to-real transfer to control a real robot in the physical world. As illustrated in Fig.~\ref{fig:fig2}, this transfer is typically realized through machine learning pipelines that bridge simulation and reality. In closed-loop control, a fundamental concept in control theory, the robot continuously uses real-time sensor feedback such as images, LIDAR, or velocity measurements to dynamically adjust its actions. Various reinforcement learning techniques and data-driven motion models derived from real-world robot trajectories can be used in this context \cite{bono2024learningtonavigate, sadek2024multiobjectnavigation} to learn approximations of the robot’s dynamics.
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/fig2.png} % Adjust width as needed
+		\caption{Sim-to-real transfer schema based on a reinforcement learning approach}
+		\label{fig:fig2}
+	\end{figure}
+	
+	\subsection{Sim-to-Real Transfer}\label{sim2real}
+	Sim-to-real transfer combines physical simulation with deep learning to train navigation models on simulators before testing them on real robots. Training agents in the real world involves significant constraints including high costs, time limitations, and safety risks, making it difficult to gather large-scale training data. The visual sim-to-real gap affords rendering photorealistic images by the simulator to match real-world visual observations captured by camera sensors. Meanwhile, physics engines take into account details of real environments, such as uneven terrains where robots should have robust locomotion capabilities. Leveraging physics engines, simulators accurately replicate collision dynamics and proprioceptive feedback, reducing the sim-to-real gap.
+	% Next, we present the key features of sim-to-real technology:
+	
+	\subsubsection{Domain Randomization}
+	As reinforcement learning (RL) usually randomizes the environment when episodes are reset, sim-to-real transfer methods add further perturbations to sensing and actuation in simulation for better generalization to the real world. Such domain randomization has been used in a synchronous multi-agent RL setting %based on Proximal Policy Optimization (PPO)
+	that develops a shared policy, and perturbations have been shown to yield more robustness \cite{Zhao2020TowardsCT}.
+	In a coverage path planning problem, in which a path covering the entire free area must be found,  a semi-virtual training setup has been employed, where coverage and frontier maps are generated in simulation to closely mimic real-world inputs, and the system is subsequently fine-tuned with real-world data \cite{Jonnarth2024SimtoRealTO}.
+	%
+	% In the other hand, the effective model-based RL solutions for vision-based real-world applications require bridging the sim-to-real gap.
+	In a twist of domain randomization, Teacher-student World model dIstillation for Sim-to-real Transfer (TWIST) \cite{Yamada2023TWISTTW} proposes three stages. It begins by training a teacher world model and policy from privileged state information in simulation, enabling efficient learning of accurate latent dynamics representations. Secondly, the knowledge of the teacher is transferred to a student model via distillation by accessing domain-randomized images. Finally, the student model is deployed by executing actions in the real environment.
+	
+	\subsubsection{Domain Adaptation}
+	Exploiting the large labeled datasets available for training in simulation, domain adaptation is a sim-to-real transfer technique that allows a model trained in simulation to perform well in the real world. It ensures that the learned policies or perception systems generalize from simulation to reality without requiring retraining from scratch. This is a critical approach for vision-based navigation, where visual discrepancies (textures, lighting, noise) represent a major challenge.
+	
+	In principle, we collect a small set of real-world trajectories and adapt the parameters of the simulator until simulated rollouts become indistinguishable from real-world ones. Once the hybrid simulator is calibrated, it can be used as a new training environment, and the resulting policy can then be deployed in the real world without requiring additional real-world samples.
+	
+	For instance, SimGAN \cite{Jiang2021SimGANHS} approaches simulator identification as an adversarial reinforcement learning problem. It effectively adapts policies using just a single batch of real-world data before refining them within the learned simulator. The sim-to-real architecture pipeline consists of three main modules: perception, policy, and controller. Another model, which trains a position controller in simulation using an actor-critic approach, uses cycle-consistent generative adversarial networks (CycleGAN) to transfer between real and simulator images \cite{Yuan2022SimtoRealTO}. The controller is then transferred to real robots. % by converting position outputs into force commands through an admittance controller, which provides compliance to prevent jamming or damage.
+	
+	For high-stakes applications like autonomous driving, a limited amount of human-labeled real-world data is typically accessible. This allows both appearance and content gaps to be tackled in supervised sim-to-real adaptation \cite{Prabhu2023BridgingTS}. The CARE system overcomes the dissimilarity between simulated and real cars by forcing the overlap of objects (``car boxes'') in simulation and reality through internal features. It then assigns higher weights to simulated samples that better reflect the real dataset statistics.
+	
+	Domain adaptation is also applied in semantic segmentation. For example, industrial environments with humans and robots are modeled in the NVIDIA IsaacSim simulator, while aligning the synthetic data with LIDAR-based data to match classes across domains \cite{Amin2025EnhancingHC}. Segmentation robustness is improved by fusing local geometric structures extracted with a Dynamic Graph Convolutional Neural Network (DGCNN) and hierarchical features. The approach then transfers to the real world using data adaptation strategies such as data augmentation, fine-tuning, and layer freezing.
+	
+	
+	\subsection{Simulators and Datasets}\label{simulators}
+	Simulators play a critical role in robotics by providing safe, scalable, and controlled environments for training and thorough evaluation of algorithms across various scenarios. Tables \ref{tab:simulators_indoor} and \ref{tab:simulators_nav} contain weblinks and citations to relevant software packages. We present modern simulators adopted by roboticists to train neural network-based navigation methods.
+	
+	To be of value, a physics simulator needs to be equipped with realistic scenarios, particularly in navigation, which requires rich visual input to simulate navigation in large and cluttered spaces. To generate such a scenario, one of the most used indoor scenes datasets is Matterport3D, a large RGB-D dataset containing 10,800 panoramic views of 90 building-scale scenes with annotations that determine camera poses and 2D/3D semantic segmentation.
+	For example, the Habitat-AI platform is based on Matterport3D, or alternatively the datasets Replica or 2D-3D-S \cite{Savva2019HabitatAP}.
+	%The Habitat-AI platform is a common task framework for research into embodied or physical agents.
+	Habitat is composed of three layers: the generic dataset support, the habitat simulator, and the habitat API. It has been extended to human-robot interaction \cite{Puig2023habitat3} but is weak on object interaction.
+	%As the majority of simulators share scenes, physical space, and agent features,
+	AI2-THOR includes actionable objects, and RoboTHOR, which is built upon it, tests robots on synthetic scenes for variants of reinforcement learning methods.
+	Easy and hard conditions for sim-to-sim and sim-to-real applications can be modeled. The iGibson simulator implements a set of predicate logic functions that map the simulator states to logic states sampled to valid physical states. iGibson supports domain randomization where the materials and the shapes of the visual and physical objects can be changed \cite{Li2021iGibson2O}.
+	\input{tables/table_datasets1}
+	\input{tables/table_datasets2}	
+	Increasingly, applications combine multi-modal data and text for connecting sensor signals with language. This raises the level of abstraction in autonomous driving, for example, in the Text-to-Drive simulator that synthesizes diverse driving behaviors via LLMs. In this system, the images and the texts are aligned in the same latent space with the GPT-4 foundation model, followed by training a Multi-Agent Advantage Actor–Critic algorithm (MAA2C) to control certain concepts, such as avoiding an animal on the road. Also, the system gets other textual inputs to generalize the policy for diverse trajectories like avoiding trees and cars by utilizing the swapping textual features technique \cite{Wang2023DriveAG, Nguyen2024TexttoDriveDD}.
+	
+	On the other hand, in indoor environments, the Go-to-Any-Thing (GOAT) benchmark advances universal navigation models that allow targets to be specified using category names, language descriptions, or images in an open-vocabulary fashion. The semantic map serves as a spatial representation that tracks object instance locations, obstacles, and explored areas. The GOAT System uses a semantic map with language, image, and category goals to know the long-term goals through a global policy. Subsequently, it utilizes the robot map to determine the actions through a control layer that executes a local policy \cite{khanna2024goatbencha}. Housekeep, in turn, is a simulator of AI for embodied navigation in home environments to rearrange objects without specifying any details. Accordingly, a mapping module updates the map with egocentric observations, updated with RGBD-aligned pixel-wise instance and semantic masks. Moreover, the frontier-based exploration discovers misplaced objects, and a task-level controller detects receptacle objects and plans their rearrangements \cite{Kant2022HousekeepTV}. The Stonefish simulator supports development and testing of machine learning algorithms for marine robotics solutions and includes several sensor implementations such as event-based cameras and optical flow sensors combined with thruster modeling and hydrodynamics \cite{Grimaldi2025StonefishSM}.
+	
+	
+
+	
+	\section{Navigation with DRL}\label{end2end}
+	
+	In this section, we first describe recent methods of Deep Reinforcement Learning (DRL). We then provide an overview of new transformer and visual transformer architectures in robot perception and planning. Finally, we present emerging applications of Visual Language Models.
+	
+	\subsection{Deep Reinforcement Learning Methods}\label{drl}
+	Several methods are related to the use of reinforcement learning as a tool for planning to avoid obstacles or for creating topological maps, such as an occupancy grid map with neural implicit mapping \cite{Chaplot2020NeuralTS}. 
+	Table \ref{tab:rl_methods_navigation} provides some categories of RL use in navigation.
+	
+    \input{tables/table_drl}
+	
+	
+	\subsubsection{Background}
+	
+	\paragraph{Reinforcement Learning}
+	
+	Reinforcement Learning (RL) algorithms solve general decision-making problems by performing trial-end-error to maximize a certain reward. They are categorized into tabular methods and function approximation methods. Tabular methods solve Markov decision process (MDP) problems with a finite number of states and actions via dynamic programming, Monte Carlo and temporal-difference learning. Tabular methods work only when the state and action spaces are discrete. Function approximation methods address large or continuous state space problems with a series of functions that represent the values, policies, and rewards. Both approaches can be applied to policy-based or value-based methods.
+
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/nrn_fig2.png} % Adjust width as needed
+		\caption{Block diagram of the DRL-based navigation system for autonomous
+			robots (adapted from \cite{Chen2020RobotNW}).}
+		\label{fig:fig3}
+	\end{figure}
+	
+	Function approximation methods typically use neural networks as function approximators. They can, for example, map raw continuous sensor observations to a (discrete or continuous) hidden state, thereby decoupling the concepts of observation and state. % such as a  handle large and continuous state/action spaces.
+	Deep Reinforcement Learning (DRL) combines the decision-making capabilities of RL with the feature representation power of deep learning to achieve end-to-end control (see Fig.~\ref{fig:fig3}). Many navigation techniques employ DRL in model-free approaches such as Proximal Policy Optimization (PPO) and Soft Actor-Critic (SAC). Another class of RL algorithms is model-based RL approaches like Temporal-Difference Model Predictive Control (TD-MPC), which learn a world model that can predict the next state from the current state and action. This prediction is often done in an internal state representation, which can represent a map obtained via SLAM, rather than on the observation directly. In bio-inspired navigation, internal representations can model grid cell and head direction cell activations. Model-based RL approaches are well-suited for planning, and they can generate valuable experiences that model-free RL agents can learn from.
+	
+	\subparagraph{Policy-based RL:}
+	
+	Reinforcement Learning (RL) can be formalized as a Markov Decision Process (MDP), in which a robot learns a policy to select actions that maximize the expected cumulative reward in a closed-loop manner by observing states, executing actions, and receiving feedback from the environment. An MDP is defined as $\mathcal{M} = \langle \mathcal{S}, \mathcal{A}, \mathcal{T}, \mathcal{R}, \rho_0, \gamma, H \rangle$, where $\mathcal{S}$ and $\mathcal{A}$ denote the state and action spaces, $\mathcal{T}(s' \mid s, a)$ the transition kernel, $\mathcal{R}(s,a)$ the reward function, $\rho_0$ the initial state distribution, $\gamma$ the discount factor, and $H$ the horizon. A stochastic policy $\pi : \mathcal{S} \to \Delta(\mathcal{A})$ generates trajectories $\tau = (s_0, a_0, \dots, s_{H})$ with likelihood
+	\[
+	P_\pi(\tau) = \rho_0(s_0) \prod_{t=0}^{H-1} \pi(a_t \mid s_t)\, \mathcal{T}(s_{t+1} \mid s_t, a_t)
+	\]
+	and its performance is measured by the expected return
+	\[
+	J(\theta)  = \mathbb{E}_{\tau \sim P_\pi}\!\left[\sum_{t=0}^{H-1} \gamma^t \mathcal{R}(s_t,a_t)\right].
+	\]
+	The goal of RL is to optimize the policy $\pi_\theta$ directly via policy gradient:
+	\[
+	\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim P_{\pi_\theta}} \!\left[ \sum_{t=0}^{H-1} \nabla_\theta \log \pi_\theta(a_t \mid s_t)\, G_t \right],
+	\]
+	where $J(\theta)$ is the objective function, and have been further improved through Actor–Critic architectures, leading to algorithms such as Deep Deterministic Policy Gradient (DDPG) and Soft Actor–Critic (SAC).
+	
+	
+	\subparagraph{Value-based RL:}
+	
+	Value-based methods estimate state and action values through $V(s)$ and $Q(s,a)$ using the Bellman optimality update
+	\[
+	Q(s_t,a_t) \leftarrow Q(s_t,a_t) + \alpha \big[ \mathcal{R}(s_t,a_t) + \gamma \max_{a'} Q(s_{t+1},a') - Q(s_t,a_t) \big],
+	\]
+	where $\alpha$ is the learning rate.
+	
+	Deep Reinforcement Learning (DRL) extends this framework with function approximators such as the Deep Q-Network (DQN).  
+	
+	
+	
+	\paragraph{Imitation Learning}
+	Imitation Learning uses the MDP to train a classifier that predicts an expert's behavior given training data obtained from the sensors (observations) and actions performed by the expert. It does not interact with the environment during training.
+	
+	The way the expert (or teacher) maps a state \(s \in \mathcal{S}\) to an action 
+	\(a \in \mathcal{A}\) can be formalized by the teacher function (or teacher policy) as
+	\[
+	H : \mathcal{S} \to \mathcal{A}, \quad a = H(s),
+	\]
+	where \(\mathcal{S}\) denotes the state space and \(\mathcal{A}\) the action space.
+	
+	In this approach, the objective function $J(\pi)$ is not directly accessible, as it is 
+	implicitly defined by the teacher's reasoning. The optimal policy can instead be determined 
+	by its similarity to the teacher's function $H$. Given a loss function $L$ that measures 
+	the discrepancy between the learned policy and the teacher's behavior, the optimization 
+	problem can be formulated as
+	\[
+	\pi^{*} = \arg\min_{\pi} L(\pi, H).
+	\]
+	Behavioral Cloning (BC) is a common imitation learning method that approximates the expert policy $\pi^{*}$ from a limited number of demonstrations provided by human teachers \cite{Werner2025LLMbasedII}. The objective function of BC is given by:		
+	\[
+	\arg\min_{\theta} \; \mathbb{E}_{(s,a^*) \sim \mathcal{D}} \left[ 
+	L\big(a^*, \pi_{\theta}(s)\big) 
+	\right],
+	\]
+	where $\mathcal{D}$ is the dataset of expert demonstrations $(s, a^*)$ sampled from the 
+	teacher's policy.
+	
+	\subsubsection{End-to-End Navigation with DRL}
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig3.png} % Adjust width as needed
+		\caption{Block diagram of a Deep Deterministic Policy Gradient (DDPG) framework. The actor–critic architecture processes sensory inputs to generate linear and angular velocity commands. The robot interacts with the world, receiving rewards for reaching the goal while avoiding obstacles. Hyper-parameter tuning refines the final policy (adapted from \cite{Chiang2018LearningNB}).}
+		\label{fig:fig4}
+	\end{figure}
+		
+	
+	Deep Reinforcement Learning (DRL) is a powerful paradigm that creates optimal decision-making policies with deep learning techniques to control robots with more effective actions compared to PID-based controllers. It has contributed to the progress of applications such as mapping \cite{Ortiz2022iSDFRN, Li2021LearningCE, Sucar2021iMAPIM}, navigation in deformable terrains \cite{Gupta2025ActorCriticCC}, or path planning. %Researchers in this field have developed specific strategies for
+	DRL has been widely applied such as for visual and off-road navigation, quad-rotor flight control, and learning the motion of marine robots. 
+	A representative example is the Deep Deterministic Policy Gradient (DDPG) framework employing an actor–critic architecture to process sensory inputs and generate linear and angular velocity commands (see Fig.~\ref{fig:fig4}).
+	
+	
+	
+	% To overcome these challenges, they have investigated various approaches.
+	
+	%We present in this section some of the most recent works such as the end-to-end geometric navigation. This technique 
+	
+
+	
+	The end-to-end learning has produced significant advances in instantaneous control of robots by stabilizing the motion of the robot. It improves the traditional end-to-end models knows by their reactive responses by training models that predicts the control commands. 	
+	
+	DRL enables end-to-end geometric navigation, which performs mapping from sensory inputs, such as 2D laser scanners of LIDAR, to control actions by applying a policy without explicit mapping. It is considered an alternative to the local planners or exploration algorithms that use multi-layer perceptrons, multi-dimensional convolutional neural networks (CNN), and gated recurrent networks \cite{Tai2017VirtualtorealDR, Xu2022BenchmarkingRL, Chiang2018LearningNB}. Furthermore, the end-to-end visual navigation does not require a planning process but only the determination of the point goals from the visual observations. In contrast, the methods that utilize model-free RL accomplish global exploration with explicit mapping with R-CNN and fast matching for path planning \cite{Anderson2017VisionandLanguageNI, Zhu2016TargetdrivenVN, Kahn2017SelfSupervisedDR, Wijmans2019DDPPOLN}. %to see verify references
+	
+	Research on Unmanned Aerial Vehicles (UAV) and Autonomous Underwater Vehicles (AUV) has explored diverse DRL methods to meet their high accuracy demands in decision-making and safety. In AUV, it leverages the visual domain randomization for zero-shot that is applied in sim-to-real transfer and implements the model-free in the agile aerial navigation of drone racing \cite{ Romero2023ActorCriticMP, Hadi2022DeepRL}.
+	
+	Furthermore, the application of the actor-critic RL with differential Model Predictive Control has shown promising results in enhancing the robustness of navigation strategies. 
+	%Recently, researchers have implemented this approach in AUVs using the off-policy model-free soft actor-critic algorithm with the proximal policy optimization 
+	Off-policy methods such as SAC \cite{Romero2023ActorCriticMP} and PPO \cite{Wijmans2023EmergenceOM} have been implemented in UAVs
+	to maintain straight-line swimming trajectories in turbulent waters.
+	
+	Certain navigation architectures operate without using DRL, as in \cite{Vorbach2021CausalNB}, which uses Liquid Time-Constant Networks (LTCs) to take into account distribution shift, occlusion, or closed-loop interactions between the controller, the environment and the actions, or the Fast-LiDARNet \cite{Liu2021EfficientAR} that introduces the Hybrid Evidential Fusion and demonstrates strong robustness to out-of-distribution events. In \cite{Quach2024GaussianST}, the authors combine 3D Gaussian Splatting to render images with LTCs to handle irregularly sampled data typically encountered in sim-to-real transfer pipelines.
+	
+	\subsubsection{Planning and perception with DRL}
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=0.7\textwidth]{figures/nrn_fig5.png} % Adjust width as needed
+		\caption{The architecture of Actor-Critic (adapted from \cite{Le2024ACR})}
+		\label{fig:fig5}
+	\end{figure}
+	
+	%Planning in DRL is a tabular method that primarily computes value functions based on environmental models gathered through sensor perception. This computational process takes features extracted via deep learning techniques like Convolutional Neural Networks (CNN) or processed through multi-head attention mechanisms. Then, it develops and refines a policy for interaction, which translates into specific actions performed by the robot's motors. DRL-based navigation has numerous applications, particularly in motion planning, where it utilizes inputs like desired trajectories and employs the Markov Decision Process (MDP) framework to maximize reward functions within closed-loop systems. This approach is applied in human-robot interaction scenarios using both value-based and policy-based reinforcement learning methods. These systems utilize sensors such as Light Detection and Ranging (LiDAR), Inertial Measurement Unit (IMU), or Red-Green-Blue-Depth (RGBD) cameras to gather environmental data.
+	
+	The robot's controller policy is learned through Deep Deterministic Policy Gradient (DDPG), which generates the appropriate actuator commands for the robot \cite{BuguenoCordova2025HumanRobotNU}. The DDPG is a specific implementation of the actor–critic framework designed for continuous action spaces.
+	Actor–Critic methods train two neural networks, the actor, which selects actions, and the critic, which evaluates them. The overall architecture is
+	illustrated in Fig.~\ref{fig:fig5} showing the agent that interacts with the environment by observing states, executing actions, and receiving rewards.
+	
+	The DDPG framework (Fig.~\ref{fig:fig4}) illustrates the end-to-end mechanism, particularly how sensory observations, such as images, LiDAR, goals, and orientation, are mapped into actions, which are then refined through hyperparameter tuning to achieve stable navigation policies.
+	
+	
+	Furthermore, other methods applied to autonomous driving use Q-learning for finding the optimal driving policy, combined with inverse reinforcement learning achieved with Maximum Entropy and Deep Neural Networks (DNN) for expert driving reproduction \cite{You2019AdvancedPF}.
+	
+	Additionally, DRL is exploited in a sequential decision-making perspective approach to tune hyperparameters such as the keyframe and grid size to localize the robot with visual odometry \cite{Jomaa2019HypRLH}. Instead of using the classical approaches of tracking and mapping, or by extracting and tracking points through consecutive images, the deep learning revolution has learned end-to-end Visual Odometry (VO) systems that apply PPO to train policies on real-time observations and infer the hyperparameters by an agent neural network whose reward is computed based on the pose error \cite{Teed2021DROIDSLAMDV, Messikommer2024ReinforcementLM}.
+	
+	Safety represents another critical aspect of navigation, particularly in autonomous driving applications that implement constrained policies. Various methods employ Deep Deterministic Policy Gradient (DDPG)-based networks, such as QuasiNav, which ensures that visits to unsafe states remain below a predefined threshold. Also, Trajectory-based Exploration with Reinforcement Planning (TERP) is a system built on a planning procedure with the DDPG-based perception. It incorporates a DRL network with an attention mechanism that processes input data from goals, poses, and elevation maps. The navigation provides the dynamically feasible velocities based on the Dynamic Window Approach with Reinforcement Learning (DWA-RL) network. Similar methods use a waypoint planner with the Dynamic Window Approach (DWA) by also combining the elevation map with the attention DRL to construct a map or using a subgoal agent \cite{Weerakoon2021TERPRP, Hossain2024QuasiNavAC}.
+	
+	On the other hand, the planning requires mapping to get the locations of the robot, both for topological and metrical navigation. Recent methods employ topological graphs created using the ResNet16 variant of CNN architecture \cite{Chaplot2020NeuralTS}. These graphs specify subgoals derived from trajectories to train a global policy. The global policy generates subgoals that a local policy then processes to determine specific navigation actions \cite{Chaplot2020LearningTE}. The goals can be generated with landmarks such as trees so that when a new landmark is observed, it is compared with the topological maps by computing a similarity measure. These methods combine extrinsic, dense and intrinsic rewards and penalties for suboptimal exploration behavior as is done in the Topological Navigation with TopoNav, which uses the Hierarchical Deep Q-Network (H-DQN). In the case of metrical navigation, the poses of the robot can be computed with an occupancy grid employed to train navigation policies of controllers. This approach selects the previous subgoals and observations that can be leveraged with attention-based features to ensure safe navigation \cite{Hossain2024TopoNavTN}.
+	
+
+		
+	
+	
+	\subsubsection{Navigation with imitation learning}
+	
+	The application of Imitation Learning (IL) in robot navigation represents a promising area advancing AI frameworks, although it is still in its early stages \cite{Waga2025ASO}. Imitation Learning is applicable in complex robot navigation tasks within dynamic environments where reward functions are difficult to compute or to help establish stabilized policies in RL models. In this context, the overall DRL pipeline (Fig.~\ref{fig:fig3}) serves as the foundation for imitation learning extensions. The work in \cite{Celemin2022InteractiveIL} presents a comprehensive survey of Interactive Imitation Learning in Robotics, highlighting various approaches implemented across diverse robotic applications in real-world settings. In classical visual navigation, NetConEmb \cite{Zain2025ImitationLF} uses a behavior cloning based IL method that employs a CNN, which takes RGBD images and outputs are the angular velocity chosen by the human. This method applies a Huber loss to mimic the operator's actions. In end-to-end navigation, the SGN-CIRL framework is a mapless robot navigation method that includes behavioral cloning within RL. It generates experiences with the Dijkstra algorithm to find the shortest path from which velocities are obtained with a pure pursuit controller. Next, a Soft Actor-Critic RL policy is trained by using only 30\% of the episodes, and the remaining experiences are from the expert controller \cite{Oskolkov2025SGNCIRLSG}. Additionally, behavioral cloning typically employs supervised learning to map states (such as pose, velocity, or acceleration) to appropriate actions. In \cite{Selvaraj2025AreLA}, a human operator uses a joystick to control the robot across 19 trajectories and learns a deep model from the LIDAR, the RGB images, and the goal; next, it outputs the actions obtained by mimicking the expert's driving style. On the other hand, the Generative Adversarial Imitation Learning in \cite{Silva2023MobileRN} uses four environments with different navigation tasks such as the Braitenberg-style behavior and obstacle avoidance to learn a generator that creates state-action pairs. The discriminator then distinguishes between expert trajectories and those produced by the policy-based learner. Additionally, MARVAL (Maximum Augmentation Regime for Vision And Language navigation) represents a transformer-based VLN agent that uses millions of synthetic training samples (see section \ref{vln}). First, it executes a pure imitation learning behavioral cloning combined with the Dataset Aggregation method (DAgger) to mimic expert demonstrations \cite{Ross2010ARO}. Second, the obtained supervision signals are passed to the transformer to estimate the actions and the auxiliary tasks the robot should perform \cite{Kamath2022ANP}. In agile quadrotor flights, IL can mimic human pilots by training models to navigate through racing gates at high speeds. After the AUV captures RGB images, a teacher model is trained using PPO (Proximal Policy Optimization) reinforcement learning, with rewards based on successful gate passing or perception alignment. The system then trains the student policy using a Temporal Convolutional Network (TCN) with the collected visual observations and teacher's actions. Subsequently, it addresses student drift into unfamiliar states through the DAgger dataset\cite{Xing2024BootstrappingRL}.	
+	
+	\section{Navigation with Transformers}\label{transformers}
+	
+	The transformer is a deep learning architecture designed to generate human language. It revolutionized the AI field through "next token prediction" and its self-attention mechanism, which weighs the significance of different words in a sequence relative to one another. Transformers can also process images and videos through Visual Transformer architectures. In navigation applications, transformers model temporal and spatial dependencies by computing attention over sequences of observations \cite{Vaswani2017AttentionIA}.
+	
+	\subsubsection{Background}
+	
+	\paragraph{Transformers}
+	
+	The transformer architecture addresses the limitations of Recurrent Neural Networks and Long Short-Term Memory networks. These earlier models are sequential and recurrent, making them difficult to parallelize and creating an information bottleneck at the final hidden state of the encoder in the Sequence to Sequence architecture. Similarly, CNNs suffer from the constraint of long-term dependencies when processing sequential local patterns.
+	
+	The transformer avoids processing the data in sequence modeling in a step-wise manner. The transformer efficiently tracks dependencies through its core self-attention mechanism, which allows it to focus on relevant positions throughout a sequence. The main architecture consists of an encoder-decoder structure with embedding layers. The encoder produces an output representation that serves as the input for the subsequent training step. Next, the decoder takes the encoded representation and iteratively generates the output. In addition, it is worth noting that inside the encoder, we find a multihead attention block that converts each token into an embedding representation of its position in the sequence. The dependencies between tokens are learned via three neural networks that produce the Query (Q), Key (K), and Value (V) representations. This mechanism is mathematically described as:
+	\[
+	\mathrm{Attention}(Q, K, V) = \mathrm{softmax} \left( \frac{QK^{T}}{scaling} \right) \cdot V
+	\]
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth, height=0.8\textheight, keepaspectratio]{figures/nrn_fig6.png}
+		\caption{Architecture of a Navigation transformer that generates tokens based on RGB observations from the past time-steps and a goal image. The Transformer outputs are used to predict the temporal distance to the goal and a sequence future actions (adapted from \cite{Shah2023ViNTAF})}
+		\label{fig:fig6}
+	\end{figure}
+	
+	\paragraph{Visual Transformers ViT}
+	
+	Originally proposed by Dosovitskiy et al, the Vision Transformer (ViT) adapts the transformer architecture to visual applications, demonstrating that a pure transformer encoder can effectively replace traditional CNN-based architectures \cite{Dosovitskiy2020AnII, 2023MachineLF}. The principle of self-attention in ViT operates identically to text transformers but applies to image data rather than text sequences. The first step is to process and split large inputs into smaller and fixed-size patches flattened into a single vector. Then, they are projected into a lower-dimensional space by applying linear transformations. Specifically, the ViT incorporates an n-layer multilayer perceptron (MLP) connector in conjunction with a pixel unshuffle operation, which serves to reduce the number of image tokens. To preserve the spatial arrangement of the patches, the ViT encodes positional information of the visual features and transmits it alongside tokens to the transformer encoder. The architecture consists of a multi-head self-attention mechanism that prioritizes relevant input sequences and a multi-layer perceptron that projects the data back to its original embedding size. Additionally, the output probabilities depend on the application; they can correspond to the location of an object, the state of a pixel in semantic segmentation, or the likelihood of an action. In robot navigation, it can rely also on discrete waypoints or the probability that a current visual place corresponds to a known location. 
+	
+	\subsubsection{Planning with transformers}
+	
+	The use of transformers in robot planning handles long-range dependencies, multi-modal sensory fusion, and efficient path generation. Like A*, Vision Transformers (ViT) can generate a guidance map layer that overlays the 2D occupancy grid, encoding navigation directions from start to goal while accounting for obstacles \cite{Liu2023ViTALR}. The ViT can also be combined with GPT to allow target-driven navigation with a dual CNN visual encoder that forwards the tokens to an action generation network as applied in NavFormer and NavN \cite{Radford2019LanguageMA,Wang2024NavFormerAT}.
+	
+	A typical example is the Navigation Transformer processing both observation tokens and goal tokens with a multi-head self-attention mechanism to predict temporal distance and future actions (see Fig.~\ref{fig:fig6}).
+	
+	
+	Several approaches incorporate Multi-Head Attention DDPG, a Deep Deterministic Policy Gradient variant that uses Actor-Critic methodology to develop continuous control policies. These models incorporate attention mechanisms that selectively focus on relevant parts of the sensory input data. The actor proposes actions and the critic evaluates them using a Prioritized Experience Replay to focus the updates on the most critical experiences \cite{Chen2024PathPI}. In addition, the Path Probability Map (PPM) is a planning-oriented representation introduced in transformer-based planners to assign a probability score to each cell in the occupancy grid. Therefore, the transformer extracts features with a CNN and deduces distant cells, then assigns to each grid cell a certain identifier that it lies on the shortest path, which reduces the computation time \cite{Kirilenko2022TransPathLH}. 
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\textwidth]{figures/nrn_fig16.png}%
+		% Remplace par ton chemin : a4a0aaa7-5f43-4b59-a22d-6d9ed77255aa.png
+		\caption{Policies trained with increasingly diverse data lead to better generalization on robots controlled by the same policy (adapted from \cite{Shah2022GNMAG}).}
+		\label{policy}
+	\end{figure}
+	
+	
+	
+	
+	\subsubsection{Goal-Conditioned Navigation}
+	
+	
+	\paragraph{Overview}
+	
+	Spatial and semantic navigation use policies trained with Reinforcement Learning and Imitation Learning algorithms. The use of generative AI overcomes the constraint of high computational resources. Generative transformers learn robust, goal-conditioned policies by modeling image-based goals and camera observations, enabling them to predict future actions. 
+	As shown in Fig.~\ref{fig:fig6}, they output a continuous sequence of future actions conditioned on past observations and a goal image, to enable robust planning in partially observable environments.
+	Let's consider a robot that starts at a random position $T_0$ and goes towards a goal position specified with an RGB image $T_G$ of the goal location. The most common approach in the literature is model-free goal-conditioned Proximal Policy Optimization, which is formalized as a Partially Observable Markov Decision Process (POMDP). It is defined with $\langle \mathcal{S}, \mathcal{A}, \mathcal{T}, \mathcal{R}, \mathcal{O} \rangle$ that represents respectively the state and goal, actions, transition dynamics, rewards, and sensor observations. To solve the task of reaching the goal, the generative transformer learns a goal-conditioned policy $\pi(a \mid o, g)$ that maximizes the cumulative return over an episode:
+	\[
+	J(\pi) = \mathbb{E}_{g \sim p_g,\; s_t \sim d^{g}_{\pi}} 
+	\left[ \sum_{t} \gamma^t r(s_t, a_t, g) \right]
+	\]
+	$\gamma \in [0,1)$ is the discount factor and $r$ is the reward function. 
+	The goal $g$ is sampled from a distribution $p(g)$, and the state $s_t$ is sampled from the 
+	goal-conditioned state distribution $d^{\pi}_{g}$. 
+	Nevertheless, instead of maximizing the objective function $J(\pi)$ used in the reinforcement learning approach, 
+	the transformer-based technique adopts \textit{Goal-Conditioned Behavior Cloning (GCBC)}. 
+	Rather than optimizing via environment rewards, it constructs a dataset of demonstrations consisting of a goal image 
+	and a sequence of observations, defined as
+	\[
+	\tau_i = \big[I_G;\, \{(o_t, a_t)\}_{t=1}^T\big]_{i=1}^N,
+	\]
+	and then learns the policy by minimizing the discrepancy between the predicted actions and the expert’s actions.
+	
+	\[
+	\pi_{\theta} = \arg\min_{\theta} 
+	\sum_{\tau \in D^*} \sum_{(o,a,I_G) \in \tau} 
+	L\!\big(\pi_{\theta}(a \mid o, I_G), \pi^*(a \mid o, I_G)\big)
+	\]
+	
+The method in \cite{Pelluri2024TransformersFI} uses the ViT approach to encode the goal image $I_{g}$ and the observations $I_{t}$ with a self-supervised vision transformer DINOv2 model. The model first learns the embedding layer weights, then uses a decoder to generate a sequence representation for predicting the next action. In contrast, the Visual Navigation Transformer (ViNT) is a goal-conditioned architecture \cite{Shah2023ViNTAF} that processes diverse inputs including images, videos, and actions, and it transforms both current observation $o_{t}$ and goal observation $o_{g}$ into goal tokens. A temporal distance is employed to predict future actions. While NoMaD follows the same architecture but uses goal masking to jointly reason about task-agnostic and task-oriented behaviors and condition the action on the context to obtain a highly expressive policy \cite{Sridhar2023NoMaDGM}. Moreover, the General Navigation Model as illustrated in \ref{policy} conditions the goal-conditioned architecture by adding the context from the target and makes predictions in the action space \cite{Shah2022GNMAG}. These models are evaluated on different simulators presented in \ref{tab:simulators_nav} and \ref{tab:simulators_indoor}. For example, the Navigation World Model (NWM), with 1M parameters, is scaled up and evaluated in simulation platforms such as Habitat-AI \cite{Bar2024NavigationWM}. It is built on a Conditional Diffusion Transformer Architecture (CDiT), which functions as an efficient and flexible stochastic planning system \cite{Blattmann2023StableVD}, mapping current states to future latent states. 
+	
+	\paragraph{Instruction-Following navigation}
+	Transformers combined with LLM can enhance the coordination of human-robot or robot-robot during multi-robot navigation. Indeed, the attention mechanism maintains pertinent features inside viewpoints captured by the camera. In \cite{Liu2022IntentionAR}, the authors use graph-based recurrent neural network architecture with attention mechanisms for intention-aware crowd navigation. The trajectory predictor takes past human trajectories and predict the future positions to form personal safety zones by considering the edges human-human and human-robot. In addition, in\cite{Zhou2024LearningCB}, the authors propose to capture spatial interactions between the robot and humans by applying Graph Attention Network (GAT) layer to compute spatial attention coefficients converted to an enhanced spatial features. Then a social attention mechanism combines spatial and temporal features to capture collective crowd dynamics while learning a value function to optimize navigation decisions. Additionally, instruction-following with LLMs allows robots to develop effective strategies in dynamic environments. Cross-modal transformers can fuse spatial-semantic features with Bird's-Eye views and textual data, helping agents interact with humans and navigation software in realistic settings through meaningful textual labels \cite{Liu2023BirdsEyeViewSG}. Furthermore, the end-to-end closed-loop autonomous driving framework called LMDrive represents an LLM mechanism that receives tokenized navigation instructions like "Turn left at the next intersection". This system employs an LLM-compatible visual-language representation, connected through a Q-Former bridge module \cite{Shao2023LMDriveCE}, to generate control signals and evaluate driving performance based on route completion and infraction scores.
+	
+	\section{Navigation with foundation models}\label{vlm}
+	\subsection{Background}\label{vln}
+	
+	
+	Vision-Language Models (VLMs) embed images and text into shared semantic spaces, enabling multimodal interaction. This approach shifts from merely responding to visual input toward understanding the intentions of non-expert users. A common implementation uses contrastive learning with cosine similarity:
+	
+	\[
+	\mathcal{L}_{\text{VLM}}(x,y) 
+	= -\log 
+	\frac{\exp\!\left(\tfrac{\operatorname{sim}\!\left(f_{\text{img}}(x),\, f_{\text{text}}(y)\right)}{\tau}\right)}
+	{\sum_{j=1}^{N} \exp\!\left(\tfrac{\operatorname{sim}\!\left(f_{\text{img}}(x),\, f_{\text{text}}(y_j)\right)}{\tau}\right)} ,
+	\]
+	
+	\noindent
+	where $f_{\text{img}}$ and $f_{\text{text}}$ map inputs to $\mathbb{R}^d$, 
+	$\operatorname{sim}(\cdot,\cdot)$ is cosine similarity between $\ell_2$-normalized embeddings, 
+	$\tau>0$ is a temperature, and $\{y_j\}_{j=1}^N$ are batch text samples. 
+	The loss aligns the positive pair $(x,y)$ while contrasting against negatives $(x,y_j)$, $j\neq i$.
+	
+	
+	\subsection{Navigation with Vision-Language Models (VLM)}\label{vlm}
+	
+	The Visual Language Models (VLM) have significantly advanced the perception and navigation of mobile robots. They play an important role in semantic mapping and instruction-following that specifies targets to the robot through textual instructions. Due to their ability to associate objects, scenes, and actions within shared representation spaces of visual features and linguistic descriptions, VLMs can build 3D environments with high-level semantic perception. 
+	The LLM enables the robot to follow natural language instructions by bridging high-level semantic goals with low-level control policies. As illustrated in Fig.~\ref {fig:fig7}, textual and visual prompts are processed to generate goals passed to exploration algorithms and low controllers to produce concrete actions. Beyond specifying semantic goals, LLM can interact with users through natural conversation to refine its goals and directly output action-level instructions. Fig.~\ref{fig:fig8} illustrates this dialogue-based scheme where a user query uses an LLM to produce semantic goals and corresponding actions to guide the agent in the environment. 
+	Furthermore, the foundation models unify multimodal perception and high-level reasoning for navigation tasks. Fig.~\ref{fig:fig9} presents a general architecture of visual-language action generation that involves both Vision-Language Models (VLMs) and Large Language Models (LLMs) to translate instructions and state information into executable robot actions.
+	
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth, height=0.8\textheight, keepaspectratio]{figures/nrn_fig9.png}
+		\caption{The general architecture of vision-language-action models with three representative methods for action prediction. Related components are presented in dashed boxes (adapted from \cite{Ma2024ASO}).}
+		\label{fig:fig9}
+	\end{figure}
+	
+	
+	\paragraph{LLM architectures of navigation}\label{llm}
+	The Large Language Models play a significant role in predicting navigation tasks by merging data from semantic maps and other sources \cite{liu2023survey, feng2024agile, Chahine2024FlexET}. BLIP2 and Text-to-Drive models extract multi-modal spatial features to generate human-interpretable behaviors \cite{Li2023BLIP2BL, Nguyen2024TexttoDriveDD}. In closed-loop control architectures, pre-trained neural encoders with fixed parameters, such as ResNet or BLIP2, extract key features from real-time sensory inputs. These features are subsequently used either to infer actions adaptively through sim-to-real transferred models \cite{Bono2024LearningTN, sadek2024multiobjectnavigation, khanna2024goatbencha, Wang2023LearningSA, Li2023BLIP2BL}, or via lightweight policy heads trained on top of frozen vision-language models \cite{Chahine2024FlexET}.
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth, height=0.8\textheight, keepaspectratio]{figures/nrn_fig7.png}
+		\caption{ This architecture analyzes visual or textual data to extract goal-relevant information, which exploration policies then use to generate actions that guide agent movement. It identifies key information such as targets and locations that exploration algorithms leverage to guide agents in completing navigation tasks (adapted from \cite{Lin2023AdvancesIE}).}
+		\label{fig:fig7}
+	\end{figure}
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth, height=0.8\textheight, keepaspectratio]{figures/nrn_fig8.png}
+		\caption{This architecture uses LLMs as planners (using a dialogue format as an example) that directly generate actions for exploration policies to control agents. It performs planning and provides these actions to the exploration algorithms to complete navigation tasks (adapted from \cite{Lin2023AdvancesIE}).}
+		\label{fig:fig8}
+	\end{figure}
+	
+	\paragraph{Semantic Mapping}
+	
+	In this context, LM-Nav is a system that leverages both CLIP and GPT-3 models. The system processes textual instructions to specify subgoals and incorporates Vision-based Navigation Grounding (ViNG) to combine hierarchical planning with topological mapping. LM-Nav employs the Floyd–Warshall algorithm \cite{Shah2020ViNGLO} to find the shortest paths between all pairs of nodes in a weighted graph. In addition, the PlaceNav and TopoMap frameworks perform similar tasks by respectively integrating a Bayesian filter to enhance temporal consistency \cite{Suomela2023PlaceNavTN}, and constructing dynamic maps with predefined landmarks \cite{Blchliger2017TopomapTM, Shah2022LMNavRN}. PixNav \cite{Cai2023BridgingZO} and TANGO \cite{podgorski2025tango} also use VLMs alongside CNNs to understand high-level semantic environments. The VLM describes objects and text before feeding this information into a ResNet-18 pixel-level navigation policy trainer that estimates actions. 
+	
+	\paragraph{Text-Aware trajectories generation}
+	
+	The VLM also enhances metric path-planning algorithms by generating trajectories that account for obstacles and free space, and adding textual instructions like “walk past the kitchen table and stop near the red sofa”. Those text-aware trajectories enable the robots to follow implicit or explicit navigation behaviors to understand whether the environment is indoors or outdoors \cite{Sathyamoorthy2024CoNVOICN}.  Notably, global planners integrate VLMs to create routes based on global views, language-specified navigation goals, and estimated terrain traversability. Complementing these, frontier-based planners such as DWA produce suitable robot actions \cite{elnooricra25}.
+	
+	
+	\paragraph{Cross-Embodied Navigation}
+	On the other hand, VLMs naturally integrate multi-modal fusion, enabling cross-embodied navigation that transfers knowledge learned in one modality to another. In \cite{Yang2024PushingTL}, researchers developed a policy that guides robot movement from its current position to a goal location using observations from video sequences. This system employs an EfficientNet-B5 architecture connected to a transformer core that processes the multimodal data together.  In \cite{Huang2025MultimodalSL}, the authors integrate CLIP encoder with AudioCLIP and CLAP to create the Visual-Language Feature Fusion (VLMaps) model, which works in conjunction with Multimodal Fusion through AVLMap \cite{Huang2023AudioVL}.
+	
+	
+	\paragraph{Visual Language Navigation (VLN)}\label{vln}
+	
+	The BERT model is trained by masking or hiding a word in a sentence and then predicting the missing word. Several methods have extended the BERT model to address the problem of visual language navigation (VLN). VLN+BERT tackles the problems of partial observability of the VLN.
+	Vision-and-Language Navigation (VLN) models develop policies that translate language instructions and visual input into navigation actions. These systems typically employ cross-modal transformers to process both information types:
+	
+	The hidden representation at time step $t$ is computed as
+	\[ h_t = \text{Transformer}\!\left([X,\, V_t,\, O_t]\right) \]
+	where $X = (x_1,\ldots,x_n)$ denotes the sequence of language tokens from the navigation instruction,
+	$V_t = (v_1^{(t)},\ldots,v_m^{(t)})$ are the visual tokens extracted from the current observation at time $t$,
+	and $O_t = (o_1^{(t)},\ldots,o_k^{(t)})$ are the object-level tokens.
+	The multimodal embedding $h_t$ is then used to predict the next action $a_t$.
+	
+	The training objective is the negative log-likelihood (cross-entropy) of the demonstrated action sequence:
+	
+	\[ \mathcal{L}_{\text{VLN}} = - \sum_{t} \log p\!\left(a_t \mid h_t\right), \]
+	
+	where $p_\theta(a_t \mid h_t)$ is the probability of selecting action $a_t$ given $h_t$ under parameters $\theta$.
+	
+	The model extends BERT with a recurrent mechanism that maintains cross-modal state information.
+	Formally, it learns a policy over four input sets: the previous state representation $s_{t-1}$, the language tokens $X$, the visual tokens $V_t$ encoding the current scene, and the object-level tokens $O_t$.
+	The parameters are initialized from the large-scale pre-trained model OSCAR, and the network outputs the updated state $s_t$, the action probabilities $p(a_t \mid s_t)$, and the object grounding probabilities $p(o_t \mid s_t)$.
+	
+	Trained on the R2R and REVERIE datasets, VLN+BERT enhances the PRESS method's approach, which fine-tunes a pre-trained BERT model specifically for instruction encoding. Like PREVALENT, VLN-BERT utilize transformer architectures to encode both textual and visual features while training a dedicated navigator network from scratch \cite{Li2019RobustNW, Hao2020TowardsLA, Majumdar2020ImprovingVN}. In is worth noting that the pre-trained vision-linguistic knowledge integrated into VLN+BERT enables more effective fine-tuning and leads to improved agent performance \cite{Anderson2017VisionandLanguageNI, Qi2019REVERIERE}.
+	
+	
+	\section{Navigation with Symbolic Graph Structures}
+	\subsection{Background}
+	\paragraph{Symbolic navigation}
+    Symbolic navigation represents the environment as an abstract graph of places and their relations.  
+	Formally, a graph $G = (V, E)$ consists of a set of vertices or nodes $V$ and a set of edges or relations $E$.
+    A map is modeled as:
+	\[
+	G = (V,E), \quad V = \{\text{places, objects}\}, \; E = \{\text{relations between them}\}.
+	\]
+	Navigating from one node to another can only be done along existing edges.
+ In this way, navigation reduces to a symbolic path planning problem to find, among all set of all paths or policies $\{\pi\}$, the optimal a:
+	\[
+	\pi^* = \arg\min_{\pi} \sum_{(i,j)\in \pi} c(i,j),
+	\]
+	where $c(i,j)$ encodes the traversal cost along the edge between symbolic nodes $i$ and $j$
+	(e.g., adjacency, accessibility or semantic relations).  
+	
+	Symbolic navigation abstracts from the processing of raw sensory data and assumes that a simplified representation of the environment exists.
+    This allows reasoning to be performed at an abstract level, making it computationally efficient, intuitively understandable, and suitable for partially known environments.
+	\paragraph{Neuro-symbolic navigation} Neuro-symbolic navigation extends symbolic methods by integrating 
+	uncertainty and learned perception. Instead of a single symbolic state, 
+	the robot maintains a \emph{belief distribution} over states:%symbolic predicates:
+	\[
+	b_{t+1}(s') = \eta \, O(o_{t+1}\mid s',a_t) 
+	\sum_{s} T(s' \mid s,a_t)\, b_t(s),
+	\]
+	where $b_t(s)$ is the belief of the state $s$.
+    The observation model $O$ predicts the probability of sensory observation $o_{t+1}$ given state $s'$ and action $a_t$.
+	The transition model $T$ predicts the probability of state $s'$ as a consequence of performing an action $a_t$ in state $s$. $\eta$ is a normalizing factor. Hence, the belief is a probability distribution over states that is updated from time $t$ to $t+1$ by considering the previous belief, the transition probability, and the probability of the current observation.
+	
+	In addition, symbolic-physics \emph{ constraints} can be combined with neural estimators to develop the motion model of the robot with the Euler-Lagrange equation. Instead of applying the analytical form of the equation, neural networks approximate the unknown forces $f_{\text{ext}}$.
+  	
+	Finally, in semantic belief graphs \cite{Ginting2023SafeAE}, the navigation cost of the robot is expressed as an 
+	expectation over semantic uncertainty:
+	\[
+	C_g(B_i, \mu_{ij}) = \sum_{m} p(l^m)\, 
+	C_g\big((x_i,l^m), \mu_{ij}\big),
+	\]
+	where $p(l^m)$ is the semantic belief in terrain labels and 
+	$\mu_{ij}$ is the controller moving between belief nodes. $B_{i}$ and $B_{j}$ are the current and target nodes, m is the semantic terrain label, and g is the index of the graph-level formulation. In addition, $x_{i}$ is the geometric state associated with the belief $i_{th}$ ‐node $B_{i}$.
+	\subsection{Methods}
+	Topological navigation works well along streets, which are structured by junctions, in unseen and indoor environments represented with maps of symbols or places. In \cite{Talbot2020RobotNI} a symbolic layer is responsible for state extraction and planning with symbolic concepts combined with a cue interpreter that transforms observations to grammar clauses\cite{Talbot2020RobotNI}. A $move\_base$ module computes the forces needed by providing the symbols of the current and the goal places in the abstract map.
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/nrn_fig10.png} % Adjust width as needed
+		\caption{System diagram for symbolic based navigation system using cue observations to navigate an unseen space. The abstract map uses a spatial model to connect spatial symbols to direct robot perceptions (adapted from \cite{Talbot2020RobotNI})}.
+		\label{fig:nrn_fig10}
+	\end{figure}
+	
+	In fact, as shown in Fig.~\ref{fig:nrn_fig10}, symbolic navigation systems use cue interpreters and abstract-symbolic maps that transform high-level linguistic or perceptual cues into metric and symbolic goals. The Topological Semantic Graph Memory (TSGM) \cite{Kim2022TopologicalSG} represents the environment with a symbolic semantic graph of objects and places. Addressing mainly indoor navigation, it creates a map with object symbols connected with edges forming the graph. This type of mapping is suitable for image-goal-navigation, semantic exploration, and instruction following navigation, which enables response to queries like ``Fetch medicine from the cabinet'' or ``Go to the desk in room 3''. TSGM encodes observations incrementally into a graph of image nodes and object nodes connected by relational edges. Additionally, a cross-graph mixer and memory attention module update the graph online, and a recurrent action policy queries this memory to select the next navigation action toward the target. In contrast, the AnyNav system constructs a symbolic physics graph of terrain friction to plan safe off-road trajectories. It uses a Visual Transformer based encoder to extract latent features that identify terrain classes and estimate friction coefficients, and employs a neuro-symbolic planner to construct an explicit graph of the environment, where nodes represent the robot’s locations and edges correspond to feasible motions under the estimated friction \cite{Fu2025AnyNavVN}. In \cite{Zhao2024PhysORDAN}, the system builds an explicit dynamics structure via a symbol part represented with Euler-Lagrange equations. It uses neural nets to estimate potential energy derivatives and external forces. It is worth noting that some recent methods such as the Neuro-Symbolic Planner (NSP) \cite{English2024NSPAN} use the GPT-4o-mini LLM foundation model to specify environment descriptions like ``a grid world with obstacles,'' goals such as ``find the shortest path from A to B,'' and constraints like ``avoid water cells.'' Next, it turns the free‐form language into structured graph inputs and planning constraints, and applies a symbolic path planner on that graph representation to compute a candidate path from start to goal.
+	
+	Furthermore, some research approaches prioritize symbolic predicates over raw sensory data like pixels or range measurements. In \cite{Alcedo2025PerspectiveShiftedNW}, the authors design a system inspired by the theory of mind and epistemic planning. The architecture is a model-based reinforcement learning that uses a Variational Autoencoder (VAE) architecture based on a symbolic latent space. For example, the predicates "is the person visible?" or "has the goal been seen?" are maintained with a belief distribution (like "90\% chance the person is behind the wall, 10\% chance they are already gone") and output structured, interpretable state information for higher-level reasoning such as "The robot believes the goal is not yet reached with 95\% probability." This information is then used by a Deep Q-Network (DQN) to determine the robot's actions.
+	
+	\section{Neuromorphic Perception and Navigation}\label{neuromorphic}
+	\subsection{Navigation with Event Cameras}\label{event}
+	\subsubsection{Background}
+	
+	\paragraph{Event cameras}
+	
+	Event cameras are neuromorphic, dynamic vision sensors that detect motion by measuring brightness changes asynchronously and independently across a scene. These sensors process pixels sequentially and generate a stream of digital pulses known as spikes. Drawing inspiration from biological visual pathway mechanisms, the event generation process can be mathematically modeled as follows.
+	
+	In a noise-free scenario, a discrete event $(\mathbf{x}_k, t_k, p_k)$ triggered at the pixel $\mathbf{x}_k \doteq (x_k, y_k)^{\top}$ corresponds to the time $t_{k}$ when there is an increase of the brightness since the last event at the pixel:
+	
+	\begin{equation}
+		\Delta L(\mathbf{x}_k, t_k) \doteq L(\mathbf{x}_k, t_k) - L(\mathbf{x}_k, t_k - \Delta t_k),
+	\end{equation}
+	
+	where $\Delta t_k$ is the time elapsed since the last event at the same pixel.  
+	
+	The triggering condition is defined by  
+	\begin{equation}
+		\Delta L(\mathbf{x}_k, t_k) = p_k \, C, \qquad C > 0,
+	\end{equation}
+	which states that a spike is emitted whenever the magnitude of the brightness change reaches the contrast threshold $C$. The polarity $p_{k}$ encodes the sign of the change, with  
+	\[
+	p_{k} = 
+	\begin{cases}
+		+1, & \text{if } \Delta L(\mathbf{x}_k, t_k) > 0 \quad \text{(ON event)}, \\[6pt]
+		-1, & \text{if } \Delta L(\mathbf{x}_k, t_k) < 0 \quad \text{(OFF event)}.
+	\end{cases}
+	\]
+	
+	This process enables spiking neural networks to directly process event streams for motion estimation (Fig.~\ref{fig:fig9}).
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/fig5.png} % Adjust width as needed
+		\caption{Event-based camera with spiking neural network for estimating 3-axis angular velocity from input spikes."}
+		\label{fig:fig9}
+	\end{figure}
+	
+	\paragraph{Spiking Neural Networks (SNN)}
+	In bio-inspired navigation, researchers draw inspiration from neural models observed in animals, particularly species with small brains that demonstrate remarkably efficient navigation strategies. The Spiking Neural Networks (SNN) are widely used in neuromorphic computing, as they offer high energy efficiency in hardware implementation. Unlike the Artificial Neural Networks (ANN) which rely in on continuous-valued activations, the SNN operate on spike events and temporal dynamics.
+	
+	A single SNN module typically consists of a three-layer architecture. Each input can be transformed into a Poisson-distributed spike train. The set of input neurons ($K_{P}$) projects to excitatory neurons, which in turn connect to a population of inhibitory neurons ($K_{I}$).
+	
+	The membrane dynamics of a neuron are commonly described by the Leaky Integrate-and-Fire (LIF) model \cite{Gerstner2002SPIKINGNM}:  
+	
+	\begin{equation}
+		\tau_{m} \frac{dV(t)}{dt} = (E_{\text{rest}} - V(t)) 
+		+ g_{e}(t)\,(E_{\text{exc}} - V(t)) 
+		+ g_{i}(t)\,(E_{\text{inh}} - V(t)),
+	\end{equation}
+	
+	where $\tau_{m}$ is the membrane time constant, $E_{\text{rest}}$ the resting membrane potential, $E_{\text{exc}}$ and $E_{\text{inh}}$ the reversal potentials of excitatory and inhibitory synapses, $g_{e}(t)$ and $g_{i}(t)$ their time-varying synaptic conductances, and $V(t)$ the membrane potential of the neuron. When $V(t)$ crosses a threshold $V_{\text{th}}$, the neuron emits a spike and $V(t)$ is reset to $E_{\text{rest}}$.  
+	
+	During synaptic plasticity, the synaptic weight update can be expressed in a general form as:  
+	
+	\begin{equation}
+		\Delta w_{pe} = \eta \, \big(x^{\text{pre}}_{pe}(t) - x^{\text{tar}}_{pe}(t)\big) \, \big(w_{\max} - w_{pe}(t)\big)^{\mu},
+	\end{equation}
+	
+	where $\eta$ is the learning rate, $x^{\text{pre}}_{pe}(t)$ denotes the pre-synaptic activity (e.g., the number or trace of pre-synaptic spikes up to time $t$), $x^{\text{tar}}_{pe}(t)$ is the postsynaptic target trace or desired spike response, $w_{\max}$ is the maximum allowable synaptic weight, $w_{pe}(t)$ is the current weight, and $\mu$ is a factor controlling the dependence of the update on the existing weight.  
+	
+	In unsupervised tasks such as visual place recognition, learning typically relies on spike counts as a proxy for neuronal selectivity. Specifically, the number of spikes $S_{e,l}$ generated by the $e$-th excitatory neuron for class $l$ is recorded. The predicted label $A_e$ is then assigned to the class that maximizes the spike response:  
+	
+	\begin{equation}
+		A_{e} = l^{*} = \arg\max_{l} S_{e,l},
+	\end{equation}
+	
+	where $A_{e}$ is the predicted label for neuron $e$, $l^{*}$ is the index of the selected class, and $S_{e,l}$ represents the spike count of neuron $e$ in response to inputs from class $l$.  
+	Furthermore, neuromorphic devices implementing SNN algorithms are widely used in robot navigation across various environments due to their exceptional accuracy.  Spiking Neural Networks (SNNs) demonstrate high efficiency in visual place recognition, achieving robust performance when implemented in neuromorphic hardware as summarized in the neuromorphic navigation framework (Fig.~\ref{fig:fig11}).
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig11.png} % Adjust width as needed
+		\caption{Neuromorphic navigation framework: The event and depth cameras capture scenes that are forwarded to spike-based perception modules for object detection and real-time localization/mapping. The planning and determination of robot commands occur on a GPU device, which sends high-level trajectories to a low-level controller on the target robot platform (adapted from \cite{Sanyal2025RealTimeNN})}
+		\label{fig:fig11}
+	\end{figure}
+	A more specific approach involves learning small subsets of places using independent SNN modules and then combining their predictions. In \cite{Hussaini2023ApplicationsOS}, each input is represented as a Poisson spike train of the form
+	
+	\begin{equation}
+		x_i(t) = \sum_k \delta(t - t_i^k), \quad i = 1, \dots, K_P,
+	\end{equation}
+	
+	where $K_P$ is the number of input neurons and $t_i^k$ denotes the spike times of neuron $i$.
+	
+	
+	
+	
+	
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig12.png} % Adjust width as needed
+		\caption{Overview of the proposed patch selection and sampling pipeline in DEVO that automatically identifies where valuable motion information exists within the event frame. Given an event voxel grid $E_i$, the feature extractor generates a feature map, while the patch selector network predicts a score map $S_i \in [0,1]^{H \times W}$ indicating the spatial likelihood of informative regions for optical flow and pose estimation. The system obtains a pooled score map through $4 \times 4$ average pooling and grid-based aggregation. A multinomial sampler then selects $P=96$ patch coordinates distributed across the image plane according to the score values. The right column displays representative score maps, highlighting how the network learns to emphasize geometrically discriminative regions from event data compared to standard frame gradients (adapted from \cite{Klenk2023DeepEV})}
+		\label{fig:fig12}
+	\end{figure}
+	
+	
+	\subsubsection{Event Cameras with SNNs}
+	Significant advances in developing navigation applications with event cameras have been made in recent years, exploiting improvements in sensor technology and generative AI models. For object detection, event data is structured in various ways to mimic the human visual system. A more specific architecture called EGSST-B involves implementing a graph structure and training a Graphical Neural Network (GNN) that preserves the spatial and temporal information in the feature maps \cite{Wu2024EGSSTEG}. These predicted dynamic features are then processed through a multi-scale linear Vision Transformer (ViT) that aggregates them. In addition,  another system called AEGNN is a pure GNN that handles event data incrementally and asynchronously \cite{Schaefer2022AEGNNAE}. The Spiking DenseNet is a tool that groups perceptual data into voxel cubes forwarded to four different SNNs. In contrast to CNN based object detection, this scheme applies functions with Parametric Leaky Integrate-and-Fire neurons (PLIF) neurons \cite{Cordone2022ObjectDW}.
+	Additionally, event cameras are well-suited for drone and Autonomous Underwater Vehicle (AUV) navigation as they eliminate motion blur during docking operations. Indeed, they can track and detect objects by training SNNs that extract motion information from features, where low-speed objects generate sparse spikes and high-speed objects produce dense spikes \cite{Zhang2022EventBasedCD}. On the other hand, the generation of the trajectory with the obstacle avoidance constraint is studied in \cite{Sanyal2025EnergyEfficientAA} with a Physics-Guided Neural Network (PgNN). This network predicts near-optimal flight durations with a Physics-Guided Neural Network that integrates energy-efficiency constraints and physics consistency, providing trajectories that minimize actuation energy during AUV navigation.  In \cite{Zhang2022EventBasedCD}, the SNN encodes circle hypotheses in the 3D Hough parameter space, where each neuron represents a specific candidate circle. When a neuron fires, its index corresponds to a detected circle, which serves as a landmark for computing the AUV's relative pose using the PnP (Perspective-n-Point) algorithm. 	
+	
+	
+	\subsubsection{RL and VLM on Event Cameras}
+	The fast response of event cameras has boosted several neural methods, such as Deep Reinforcement Learning and Imitation Learning, for tasks including collision avoidance, unmanned aerial tracking, and AUV mapping. In the visual odometry figure \ref{fig:fig12},  we demonstrate an architecture called Deep Event VO (DEVO) based on event data that applies CNN networks to identify significant regions necessary for tracking feature points or patches to estimate the camera's 6-DoF motion (translation + rotation)\cite{Klenk2023DeepEV}. Besides, in \cite{BuguenoCordova2025HumanRobotNU}, a human-robot navigation controller is introduced using event-based sensing. Pedestrian features extracted from event frames are processed with a state builder, and an off-policy Actor-Critic reinforcement learning algorithm computes the linear and angular velocities. Controllers for Autonomous Underwater Vehicles can also employ model-free end-to-end policies rather than simple Proportional-Integral-Derivative controllers to correct disturbances by directly mapping event values to control values, as demonstrated by the authors in \cite{Souissi2024LeveragingES}. 
+	
+	Moreover, combining event cameras with Visual Language Models has opened new opportunities to build robot navigation systems with advanced capabilities in querying the system with natural language, understanding visual scenes, and generating image captions. Combining these features with the asynchronous nature of event cameras captures fast motion by detecting changes in scenes with very low latency.
+	
+	The EventCLIP \cite{Liu2024EventGPTES} is an adaptation of CLIP for event cameras that collects all events and creates a histogram for each pixel showing the number of events that occurred at each time point, then transforms this data into an RGB image format. The tests are done on N-Caltech, N-Cars, and N-ImageNet. The challenging lighting and high-dynamic scenarios suggest applying multimodal large language models (MLLMs) on events instead of images. In addition, EventGPT represents the events within a time window with feature maps encoded with ViT-L/14-336px aligned with textual representation. The second component is a spatio-temporal aggregator trained from a large-scale synthetic event-text dataset called NImageNet-Chat to produce a single compact embedding representation. Subsequently, the Vicuna v1.5 LLM processes this aggregated data to generate responses to the given prompts \cite{Liu2024EventGPTES}. In the context of decision-making for drone navigation, navigating in a dynamic environment and avoiding obstacles is tackled in Neuro-LIFT by translating human speech into high-level planning commands with a Neuromorphic Sensing Module that generates the environment state. The event camera tracks the motion of the goal or ring to interpret high-level goals, which produces semantic navigation objectives. A PID-based low-level controller (EV-PID) then adjusts motor commands to follow the planned trajectory \cite{Joshi2025NeuroLIFTAN}.
+	
+	
+	\subsection{Spatial-cell Models for Cognitive Autonomous Navigation}\label{pcgchdc}
+	Robotics and neuroscience are sister disciplines that aim to apply models of the brain to robots to navigate accurately towards their goals. This requires application of high-level and low-level commands that involve steps of localization and mapping. Self-positioning and goal-oriented navigation behaviors of robots can be modeled with spatial cell models which provide the fundamental neural codes for navigation, as illustrated in Fig.~\ref{fig:fig10}, showing activations of place, grid, head-direction, and boundary cells. 
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig13.png} % Adjust width as needed
+		\caption{Pipeline of brain-inspired navigation methods(adapted from \cite{Lu2025HybridNeuroSLAMAN})}
+		\label{fig:fig13}
+	\end{figure}
+	\paragraph{Spatial Cell Models}
+	In new bioinspired navigation systems, several recent contributions have presented new architectures to build cognitive maps and spatial cell models that the robot uses to obtain its location or to make a plan. The cognitive map can be constructed by modeling the place cells and head direction cells activations. This requires a grid cell model to determine the robot's location.
+	
+	The successor representation, a reinforcement learning technique, encodes predictive relationships between spatial topological nodes to anticipate the robot's next position \cite{Yu2023ABR}.  Another approach iteratively builds the map rather than creating it in a single step. This method updates place cells with temporal difference learning, then calculates the robot's position using place cell activations to determine a goal-directed policy \cite{Scleidorovich2022AdaptingHM}. The dynamics of the place cells can also be modeled with an actor-critic RL network by strengthening the trajectory memory and refining the learned strategies with the two following methods. The Place Cell Replay is a concept inspired by hippocampal function. During rest or sleep periods, researchers found that place cell activations are replayed in the hippocampus. The second concept "Hippocampal Reverse Replay" occurs after rest periods when the same sequence of place cells is replayed "backward" \cite{Whelan2021ARM}.
+	
+	The analytical models show place cell activity as:
+	
+	\[
+	P_{it} = \exp\!\left(-\tfrac{d_{it}^2}{r_i^2}\ln(\alpha)\right),
+	\]
+	\paragraph{Reinforcement Learning with Neural Spatial Codes}
+	Additionally, robot motion control can be achieved by applying reinforcement learning to create a model of place cells (PC), grid cells (GC), and head direction cells (HDC), which are then coupled with RL policies to generate appropriate motor actions. The EDEN system \cite{Walczak2025EDENED} uses DRL in path integration by transforming egocentric motion to periodic spatial codes strengthened with visual cues. The model-free RL policy is trained with the Proximal Policy Optimization (PPO), receives grid codes, head directions, and sensory inputs and produces the linear and angular velocities. It should be emphasized that the grid cells are trained with an LSTM network that takes inputs from a distributed embedding layer of motion and sensory features \cite{Walczak2025EDENED}. Also, In \cite{Banino2018VectorbasedNU}, a CNN is trained to predict the current activated place cell and head direction cell, followed by an LSTM that learns grid cell patterns. After getting the activations, these systems use a model-free actor-critic algorithm with a six-unit linear layer to learn a policy for navigating robots from current positions to goals. The algorithm processes multiple inputs: embedding ($e_t$), reward ($r_t$), previous action ($a_{t-1}$), current grid code, goal grid code ($g^*$), and grid network activations from the last code. Next, the critic learns the value function that evaluates with cumulative reward how good the action is. This approach was implemented in \cite{Simkuns2025DeepLG} on a mobile unmanned ground vehicle (UGV). 
+	\paragraph{Bio-Inspired Systems}
+	Several bio-inspired SLAM systems imitate mammalian navigation by combining attractor dynamics and topological reasoning. The authors developed in \cite{Yu2019NeuroSLAMAB, Raoui2022NeoSLAMNO} NeuroSLAM and NeuralObjectSLAM that create a semi-topological map and use Dijkstra's algorithm to reach a goal. They model the grid cells with a 3D continuous attractor network and use optical flow to encode the current place. It is worth noting that NeuralObjectSLAM utilizes pairwise potential functions to detect loop closure by matching subgraphs of objects. The work in \cite{Joseph2023TrajectoryTV} bridges the gap between NeuroSLAM and RAtSLAM in the form of Multiscale Continuous Attractor Networks (MCAN) that is a multi-scale parallel spatial neural network tuned with a genetic algorithm-based approach. Instead of using a single CAN, it includes multiple 2D networks with unique scale resolution to select the input network with the closest spatial resolution regarding the agent's speed to increase the accuracy in city-scale navigation.
+	\paragraph{Modeling with Continuous Attractor Networks (CAN)}
+	Place, grid, and head direction cells can be modeled with a continuous attractor network (CAN) which represents a recurrent dynamical system $\dot{\mathbf{x}} = f(\mathbf{x})$ whose invariant manifold $\mathcal{M}$ (line, ring, or torus) encodes self-location, grid periodicity, or orientation \cite{Sgodi2024BackTT}. The network is typically initialized with a truncated Gaussian $X(0,i,j)$ centered at $(x_0,y_0)$, updated at each step as: 
+	$$X(t+\delta t,i,j) = \frac{X(t,i,j) + C_f(i,j) + \epsilon(i,j) - \mu}{\|X(t,i,j) + C_f(i,j) + \epsilon(i,j) - \mu\|}$$
+	where $C_f$ is velocity input, $\epsilon(i,j)$ is local Gaussian excitation, and $\mu = \phi \sum_{i,j} X(i,j)$ is global inhibition ensuring stability.
+	
+	To model grid cells (GCs), a toroidal topology is generally chosen to avoid edge effects in a 2D array that models the 2D pose cells structure. Other approaches employ multiscale CANs operating at different spatial resolutions \cite{Joseph2023TrajectoryTV}. Head direction cells (HDCs) are often modeled using a 1D ring topology, following the classic ring-attractor model of Zhang et al or bayesian extensions. In such models, asymmetric recurrent weights enable a smooth bump translation, which is exploited for path integration in robot motion \cite{Zhang1996RepresentationOS, Kutschireiter2022BayesianII}.
+	
+	To model place cell (PC) activations, several methods can be applied, such as forming a linear combination of grid cell activations or deriving them from boundary vector inputs \cite{Moser2015PlaceCG}. Alternatively, PCs can themselves be modeled as a CAN, where $u_i(t)$ denotes the activity of place unit $i$ with preferred position $\mathbf{c}_i$\cite{Stringer2005SelforganizingCA}:  
+	Place cells can also be modeled as a continuous attractor network, where the activity of unit $i$ evolves as: $$\tau \tfrac{du_i}{dt} = -u_i + \sum_j w_{ij} f(u_j) + I_i(\mathbf{r}(t)) + \xi_i$$ with recurrent weights $w_{ij} \approx W(\|\mathbf{c}_i - \mathbf{c}_j\|)$ shaping a Mexican-hat kernel that stabilizes an activity bump around $\mathbf{r}(t)$; sensory inputs $I_i$ provide weak landmark cues, while asymmetries in $w_{ij}$ or velocity-driven terms support path integration.
+	\paragraph{Hybrid Architectures}
+	On the other hand, the hybrid neuro-robotic architectures combine "biological navigation models" with "classical odometry and vision modules". The LFVB-BioSLAM introduces the front-end lightweight range flow-based LiDAR odometry algorithm that extracts geometric features then estimates the relative motion with the Scan-to-Map Matching. To refine the calculation, it estimates the pose and the map from encoding the location and orientation with the place cells, grid cells, and the head direction cells \cite{Gao2023LFVBBioSLAMAB}. Similarly, the NeoSLAM in \cite{Pizzino2024NeoSLAMLS} uses a neocortex module implementing a Hierarchical temporal memory to encode RGB features with Sparse Distributed Representations (SDR). Hence, those features are extracted with AlexNet Conv3 layer and conveyed to the mentioned Neocortex module to learn sequences of spatial patterns. The SDR is used to compute similarities between the places to correct the odometry drift during motion. In Hybrid-NeuroSLAM, the system encodes the visual information, and implements a kd-tree structure to simulate the memory units. This is combined with a Visual-Inertial Odometry module that uses ORB-VO and VINS to create keyframes. The obtained results of these two last modules are forwarded to the place cell network that trains the place cell network with a Bayesian attractor network \cite{Lu2025HybridNeuroSLAMAN}. 
+	\paragraph{Memory Mechanisms}
+	Finally, a very promising research area is modeling visual feature association with memory mechanisms through Hebbian learning, which strengthens visual-spatial associations and memory in navigation. NeuroLoc presents a bio-inspired solution to handle single RGB images forwarded to a multi-head attention network that encodes orientations. In this system, a Hebbian rule associates visual features with places to predict the grid cell offsets and centers \cite{Li2025NeuroLocEN}. Additionally, the replay mechanism is useful for refining learning, as the place cell (PC) replay can reinforce previously traversed paths. This process also reactivates the "visual and contextual features" linked to those places \cite{Whelan2021ARM}.
+	
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/fig4.png} % Adjust width as needed
+		\caption{(A) Activations of place cells, providing a topological representation of the environment. Each color represents the activity of a distinct place cell. (B) Head direction cell activations, which depend on the animal's direction of motion. Each color represents a different direction field. (C) Activations of a grid cell, forming a characteristic triangular lattice. (D) Activation of a boundary cell producing spikes along the borders of the navigated enclosure. These neural recordings originate from animal experiments (Adapted with permission from \cite{Dabaghian2023GridCB}).}
+		\label{fig:fig10}
+	\end{figure}
+	
+	
+	
+	
+	\section{Neural based SLAM}\label{neuralslam}
+	
+	\subsection{Background}\label{placereco}
+	
+	\subsection{Neural-Based Perception and Place Recognition}\label{placereco}
+	\subsubsection{Overview}
+	During navigation, operations such as visual odometry accumulate error over time in the absence of positioning systems like GPS. One can eliminate drift by aligning the current images with previously observed images. Multiple foundation models are adapted to the VPR tasks. They can play a role in generalizing VPR algorithms in various environments, depending on the light or seasons. The new models use features such as zero-shot and few-shot capabilities to perform better in unknown environments. These models provide enhanced accuracy, multi-modal capabilities, and powerful visual embeddings that generate robust global visual features. Recent VPR methods such as PlaceFormer, ETR and CSPformer evolving from traditional approaches to deep CNNs, foundation models and transformers have emerged \cite{Kannan2024PlaceFormerTV, Zhang2023ETRAE, Li2024CSPFormerAC}. 
+	
+	In addition, the end-to-end approaches of VPR have benefited from contrastive, triplet, or self-supervised loss functions \cite{Rusak2024InfoNCEIT}. Hierarchical methods, memory modules such as NetVLAD or differentiable neural dictionaries can retain past observations to enhance place recognition. Moreover, bio-inspired methods such as the CAN, SNN or Hebbian networks contribute to advances in place recognition by decoding the activations of memory cells that predict familiar places \cite{Cueva2018EmergenceOG, Akcal2024LoCSNetLC, Raoui2022NeoSLAMNO, Yu2019NeuroSLAMAB}.
+	
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig4.png} % Adjust width as needed
+		\caption{Hierarchical framework for robot navigation. Task planning generates high-level goals, motion planning computes feasible motion plans, and the motion controller executes control inputs. Spatial AI modules (odometry, SLAM, and perception) provide feedback loops at different levels of abstraction, ensuring closed-loop interaction between the robot and its environment.}
+		\label{fig:fig11}
+	\end{figure}
+	
+	
+	It is worth noting that the classical navigation architectures rely on hierarchical task, motion planning, and control modules supported by spatial AI feedback (Fig.~\ref{fig:fig11}) extended by the neural-based approaches.
+	
+	\subsubsection{Visual Place Recognition (VPR) with Foundation Models}
+	Recent methods of visual place recognition have exploited the use of transformers for extracting and aggregating features from sensory data such as images. As mentioned in the figure \ref{fig:fig14}, they use attention mechanisms to improve robustness against appearance variation. Moreover, CNN networks extract feature maps which are then processed with pooling and prediction to compute similarity scores.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig14.png} % Adjust width as needed
+		\caption{The architecture of a visual place recognition pipeline with a foundation model consists of several components. Reference and query images are processed through a CNN to extract feature maps $f^a$ and $f^b$. Self-Attention mechanisms refine intra-feature representations, while Cross-Attention captures inter-feature dependencies between images. The pooled features are then concatenated and fed into a fully connected layer that calculates similarity predictions. This attention-based reranking enhances viewpoint and illumination invariance (adapted from \cite{Zhang2023ETRAE}).}
+		\label{fig:fig14}
+	\end{figure}
+	\paragraph{Feature extraction}
+	
+	Visual Place Recognition (VPR) consists of two key steps: visual feature extraction, which identifies salient points from current and previous images, and feature aggregation, which generates a more compact description. 
+	
+	Transformers can extract features and extend VPR systems to be multi-modal. For example, DINOv2 splits images, projects them, and uses ViT to obtain contextualized tokens \cite{Oquab2023DINOv2LR}. These systems also exploit VLMs to encode both images and text (i.e., room labels) into shared embeddings, such as applying GPT3 to classify features \cite{Mirjalili2023FMLocUF}. Additionally, the method in \cite{Wang2022TransVPRTP} leverages ViT self-attention to capture global contextual relationships between patches.
+	
+	\paragraph{Feature aggregation}
+	
+	On the other hand, the aggregation module of a VPR system receives features and produces a single invariant global descriptor representing the entire image. This is done through "Pooling," which combines local feature vectors into a more compact representation that remains robust to illumination changes and viewpoint variations. Conceptually, the robot searches for previously visited places by reducing the dimensionality of the aggregated features' compact structures. 
+	
+	In VLAD, local features are assigned to their nearest visual cluster center (codeword), and the descriptor is formed by aggregating the residuals between features and their assigned centers into a single vector. However, since each local feature is hard-assigned to exactly one cluster, quantization errors can occur when a feature lies near the boundary between clusters. NetVLAD addresses this by computing soft assignments with a VGG-16 CNN, while Patch-NetVLAD uses local patch-level descriptors \cite{Arandjelovi2015NetVLADCA, Hausler2021PatchNetVLADMF}.
+	
+	\paragraph{Pipelines of VPR}
+	
+	On the other hand, it exists several pipelines for self-supervised learning in VPR. To illustrate, SelaVPR++ applies Generalized Mean Pooling method with learnable tokens of the ViT propagated to compute binary and floating-point descriptor.Moreover, DINOv2 learns also general-global visual representations such as MVC-VPR and AnyLoc with a self-supervised learning framework ViT \cite{Oquab2023DINOv2LR, Gu2024MVCVPRML,Keetha2023AnyLocTU}. The MVC-VPR classifiers places by training a Large Margin Cosine (LMCL) classifier invariant to view points changes. It uses a K-means self-classifier to cluster places with DIVOv2 features\cite{Shao2023GlobalFA} and forwards the obtained pseudo-labels to LMCL. On the other hand, AnyLoc is a universal VPR adaptable to different environments, that use different pre-trained foundation models like DINOv2 and CLIP for extracting features and aggregating them with VLAD or GeM pooling. In addition, Revisit-Anything is a technique that encodes features derived from a graph-based segmentation approach using Delaunay triangulation \cite{Garg2024RevisitAV}. Also, In STEPP \cite{aegidiusicra25}, the authors train a pipeline that identifies traversable regions 
+	
+	
+	\subsection{NeRF-SLAM and Implicit Scene Representations}\label{nerf}
+	
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1.0\textwidth]{figures/nrn_fig15.png} % Adjust width as needed
+		\caption{This Neural SLAM scheme enables neural networks to predict 3D properties like depth and relative pose from single images or image collections.}
+		\label{fig:fig15}
+	\end{figure}
+	
+	Neural approaches to SLAM leverage the generalization capability of scene understanding 
+	to learn \emph{continuous functions} over 3D space and to handle view-dependent appearance effects 
+	\cite{Raoui2024AccurateRN, Raoui2024SimultaneousLA}. As shown in figure \ref{fig:fig15}, neural networks augment SLAM systems by predicting 3D properties—such as depth or relative camera pose—directly from input images.
+	Scene representation in visual SLAM using \emph{implicit neural functions}, such as Neural Radiance Fields (NeRF), 
+	captures consistent viewpoint-dependent effects. 
+	NeRF is a fully connected feed-forward neural network that predicts both color and volumetric density 
+	for each 3D input location and viewing direction \cite{10.1145/3503250}. 
+	Its use in SLAM has become a popular technique for replacing explicit maps, such as those in 
+	\cite{Klein2007ParallelTA, Newcombe2011DTAMDT}, with implicit neural representations 
+	\cite{Rosinol2022NeRFSLAMRD, Bloesch2018CodeSLAML, Sucar2021iMAPIM}.
+	
+	Formally, NeRF models a scene as a continuous volumetric function parameterized by a neural network:
+	\[
+	F_\theta(\mathbf{x}, \mathbf{d}) \mapsto (\mathbf{c}, \sigma),
+	\]
+	where $\mathbf{x} \in \mathbb{R}^3$ is a 3D point, $\mathbf{d} \in \mathbb{S}^2$ is the viewing direction, 
+	$\mathbf{c} = (r,g,b) \in [0,1]^3$ is the predicted RGB color, and $\sigma \in \mathbb{R}^+$ is the volume density.
+	
+	The color $C(\mathbf{r})$ of a camera ray $\mathbf{r}(t) = \mathbf{o} + t\mathbf{d}$ 
+	with origin $\mathbf{o}$ and direction $\mathbf{d}$ is obtained through differentiable volume rendering:
+	\[
+	C(\mathbf{r}) = \int_{t_n}^{t_f} T(t) \, \sigma\big(\mathbf{r}(t)\big) \, \mathbf{c}\big(\mathbf{r}(t), \mathbf{d}\big) \, dt,
+	\]
+	with transmittance
+	\[
+	T(t) = \exp\!\left(- \int_{t_n}^{t} \sigma\big(\mathbf{r}(s)\big) \, ds \right).
+	\]
+	
+	This formulation allows joint optimization of camera poses and implicit scene geometry 
+	within a SLAM framework.
+	
+	
+	
+	NeRF-SLAM combines dense monocular SLAM with NeRFs, built on an instant-NGP architecture of hash-based hierarchical volumetric representation, and incorporates DROID-SLAM \cite{Teed2021DROIDSLAMDV} that estimates the optical flow of consecutive frames with convolutional GRU network \cite{Rosinol2022NeRFSLAMRD}. While NeRF-SLAM jointly optimizes camera poses and the NeRF scene, TS-SLAM applies a uniform B-spline representation in which camera poses are smoothly interpolated from a set of control points, combined with a dynamic regularization loss that penalizes both high acceleration and irregular motion in the physical trajectory \cite{He2024OptimizingNS}.
+	\subsection{Deep Learning Architectures for Pose Estimation}\label{localization}
+	Robot localization techniques can rely on geometric optimization frameworks such as LIO-SAM and FAST-LIO2, which integrate LiDAR odometry with factor graph-based smoothing, or on fully geometric visual SLAM systems like ORB-SLAM3, which performs bundle adjustment without learning. Additionally, robust pose estimation can be achieved using methods such as TEASER++, that estimates transformations from 2D–3D or 3D–3D correspondences with high resilience to outliers \cite{Shan2020LIOSAMTL, Xu2021FASTLIO2FD, Campos2020ORBSLAM3AA, Yang2020TEASERFA}.
+	Deep learning-based localization architectures, such as D2S \cite{Bach2023D2SRS}, estimate 3D scene coordinates using a shared MLP to regress the pose and apply a multi-layer graph attention network to refine the descriptor representations. Feature extraction can be performed using SuperPoint, which outputs sparse descriptors that are then processed using a PointNet-style architecture. These features are trained using a pose regression loss on translation and orientation. In parallel, FeatLoc++ integrates multi-scale grouping (MSG) from PointNet++ to better capture the local geometric structure of sparse keypoints \cite{Qi2017PointNetDH, Bach2022FeatLocAP}.
+	
+	Another promising technique is DROID-SLAM that uses a ConvGRU-based operator to predict optical flow updates across multiple frames. It combines a flow loss with a pose loss and trains a Dense Bundle Adjustment (DBA) layer to improve generalization in depth optimization by minimizing the geometric reprojection error \cite{Teed2021DROIDSLAMDV}.
+	
+	Moreover, in contrast to traditional bundle adjustment (BA), which solves SLAM through non-linear optimization (e.g., Levenberg–Marquardt), BA-Net learns feature extraction with a differentiable layer and introduces a feature-metric error that compares the learned feature vectors at corresponding 2D image locations after projection \cite{Tang2018BANetDB}.
+
+\section{Summary}
+
+\subsection{Comparison of navigation approaches}
+In our paper, we presented a detailed comparative study of neural-based approaches, highlighting the transition from classical geometric and rule-based systems to learning-driven models that integrate perception, planning, and control. We provided a comprehensive comparison by focusing on how Deep Reinforcement Learning (DRL), Transformer architectures, and Foundation Models contribute to robot navigation in complex environments. We also summarized how each paradigm shapes the broader landscape of modern robot navigation.
+
+\textbf{DRL vs. Classical SLAM:}
+DRL and imitation learning (IL) approaches replace conventional planners such as Dijkstra or A* with end-to-end architectures that learn navigation policies and directly control the robot’s actions in response to environmental changes. Although these methods require large datasets and careful hyperparameter tuning, they achieve robust and adaptive navigation performance across diverse environments, as illustrated in Fig.~\cite{}.
+
+\textbf{Transformers vs. DRL:}
+Transformer-based models extend DRL by capturing long-term temporal and spatial dependencies, particularly in applications involving sequences of image, text, and goal tokens. As shown in the survey, the attention mechanism enables efficient multi-modal data fusion and the learning of accurate motion policies. Despite their higher computational cost, Transformers significantly enhance spatial reasoning and semantic understanding in navigation tasks.
+
+\textbf{Neuromorphic (SNN/Event-based) vs. Symbolic Navigation:}
+Neuromorphic approaches process sensory information asynchronously through spiking neural networks, providing energy-efficient perception and real-time reactivity suitable for embedded robotic control. However, they lack high-level semantic abstraction. In contrast, symbolic navigation employs topological and semantic graphs that enable logical planning and improve the explainability of navigation scenarios, although such methods remain less adaptable to dynamic and uncertain environments.
+
+In figure \ref{fig:fig_stat1}, publications increased steadily after 2020, with 2024 (22.7 \%) and 2023 (20.6 \%). This reveals the strongest research activity, confirming growing interest in neural navigation. In figure \ref{fig:fig_stat2}, Deep Reinforcement Learning (26.9 \%) dominates the field, followed by Neural-based SLAM (20.8 \%) and Spatial-cell Models (15.1 \%). This reflects a shift toward learning-driven and bio-inspired methods. Emerging areas such as transformer-based and foundation-model navigation ($\approx$
+ 7–11 \%) indicate an ongoing transition toward multimodal and reasoning-based frameworks.
+ 
+ 
+ 	
+ \subsection{Future Developments of Simulation Environments}		
+ Recent advances in Generative AI have significantly influenced the techniques used in simulators. The new platforms can create new 3D scenes from text descriptions, eliminating the need to manually design simulations.
+ %This is realized with current neural networks such as GPT and BERT.
+ These architectures parse the text with 3D scene representations via implicit neural networks with the Neural Radiance Field NeRF synthesis \cite{10.1145/3503250}. Scene generation often follows the render-refine-repeat paradigm, as seen in methods like SceneScape and Text2Room \cite{Fridman2023SceneScapeTC, Hllein2023Text2RoomET}. Several relevant architectures have been developed with different features; for example, SceneTeller uses GPT-4 via in-context learning to convert natural language prompts into structured 3D representations \cite{cal2024SceneTellerLS}. Other techniques use 3D Gaussian splatting that models blobs in the scene with anisotropic 3D Gaussians and refines the parameters with different optimization techniques. On the other hand, Gala3D generates 3D scenes with large language models (LLMs), focusing on scene-wide constraints. LucidDreamer and GaussianDreamer use 3D Gaussian Splatting and point cloud priors, respectively, to generate 3D Gaussian scenes at the object level \cite{Zhou2024GALA3DTT, Chung2023LucidDreamerDG}. These generative models allow efficient creation of complex scenes, which can bring forward more high-quality simulation environments.
+ 
+\begin{figure}[h!]
+	\centering
+	
+	%----- Subfigure 1 -----
+	\begin{subfigure}{0.95\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/statistics2.png}
+		\caption{The number of papers by year of publication.}
+		\label{fig:fig_stat1}
+	\end{subfigure}
+	
+	\vspace{0.5cm}
+	
+	%----- Subfigure 2 -----
+	\begin{subfigure}{0.95\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/statistics1.png}
+		\caption{The number of papers by research field.}
+		\label{fig:fig_stat2}
+	\end{subfigure}
+	
+	\caption{Overall statistics of the survey.}
+	\label{fig:combined_stats}
+\end{figure}
+
+
+
+
+	\section{Conclusion}
+	Autonomous navigation remains a cornerstone of robotic research. In this survey, we have shown that the Neural-based methods have been developed to handle the complexity of real-world navigation. Deep reinforcement learning, transformers, and neuromorphic sensing technologies integrated with multimodal foundation models have provided solutions to the complexity challenges of multimodal, context-dependent, and ambiguous real-world tasks. The shift from model-based frameworks to hybrid systems, along with the adoption of end-to-end architectures with complex perception, planning, and action schemes, faces challenges in generalization and sim-to-real transfer. Future navigation systems must prioritize reliability in the transition from simulation to real-world applications. These systems should integrate physics-based models with data-driven adaptability to address both real-world navigation complexity and data unreliability. Ultimately, the goal extends beyond simple spatial movement to combining efficiency with transparency and social awareness. This will advance the field through interdisciplinary innovations that unite AI, cognitive science, and robotics in creating truly intelligent machines.
+	
+	\bibliography{main}% common bib file
+	
+	%\bibliographystyle{plain}  % You can use plain, alpha, abbrv, or any preferred style
+	%\bibliography{main}  % Name of your .bib file (without the .bib extension)
+
+\clearpage
+\appendix
+\section*{Appendix A: Comparative Tables of Neural-Based Navigation Methods}
+\addcontentsline{toc}{section}{Appendix A: Comparative Tables of Neural-Based Navigation Methods}
+
+% Optional spacing or note
+\vspace{0.4cm}
+\noindent\textit{This appendix compiles extended comparison tables covering transformer-based, VLM-driven, sim-to-real, event-camera, and bio-inspired neural navigation frameworks.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INCLUDE YOUR TABLES BELOW
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ===== Sim-to-Real and DRL Table =====
+\input{tables/table_sim2real_drl.tex}   % or paste the code directly here
+
+% ===== Transformer and VLM Table =====
+\input{tables/table_transformer_vlm.tex}
+
+% ===== VLN and Event Table =====
+\input{tables/table_vln_event.tex}
+
+% ===== Bio-inspired, VPR, SLAM Table =====
+\input{tables/table_bio_vpr_slam.tex}
+	
+	
+	
+	
+
+	
+
+		
+\end{document}
+
+
+
+
+
+
+
+
