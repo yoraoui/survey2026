@@ -354,16 +354,15 @@
 	\end{figure}
 	
 	Deep Reinforcement Learning (DRL) is a powerful paradigm that creates optimal decision-making policies with deep learning techniques to control robots with more effective actions compared to PID-based controllers. It has contributed to the progress of applications such as mapping \cite{Ortiz2022iSDFRN, Li2021LearningCE, Sucar2021iMAPIM}, navigation in deformable terrains \cite{Gupta2025ActorCriticCC}, or path planning. %Researchers in this field have developed specific strategies for
-	DRL has been widely applied such as for visual and off-road navigation, quad-rotor flight control, and learning the motion of marine robots. 
-	A representative example is the Deep Deterministic Policy Gradient (DDPG) framework employing an actor–critic architecture to process sensory inputs and generate linear and angular velocity commands (see Fig.~\ref{fig:fig4}).
+
+	DRL has been widely applied such as for visual and off-road navigation, quad-rotor flight control, and learning the motion of marine robots. A representative example is the Deep Deterministic Policy Gradient (DDPG) framework employing an actor–critic architecture to process sensory inputs and generate linear and angular velocity commands (see Fig.~\ref{fig:fig4}).
 	
 	
 	
 	% To overcome these challenges, they have investigated various approaches.
 	
 	%We present in this section some of the most recent works such as the end-to-end geometric navigation. This technique 
-	DRL enables end-to-end geometric navigation, which
-	performs mapping from sensory inputs, such as 2D laser scanners of LIDAR, to control actions by applying a policy without explicit mapping. It is considered an alternative to the local planners or exploration algorithms that use multi-layer perceptrons, multi-dimensional convolutional neural networks (CNN), and gated recurrent networks \cite{Tai2017VirtualtorealDR, Xu2022BenchmarkingRL, Chiang2018LearningNB}. Furthermore, the end-to-end visual navigation does not require a planning process but only the determination of the point goals from the visual observations. In contrast, the methods that utilize model-free RL accomplish global exploration with explicit mapping with R-CNN and fast matching for path planning \cite{Anderson2017VisionandLanguageNI, Zhu2016TargetdrivenVN, Kahn2017SelfSupervisedDR, Wijmans2019DDPPOLN}. %to see verify references
+	DRL enables end-to-end geometric navigation, which performs mapping from sensory inputs, such as 2D laser scanners of LIDAR, to control actions by applying a policy without explicit mapping. It is considered an alternative to the local planners or exploration algorithms that use multi-layer perceptrons, multi-dimensional convolutional neural networks (CNN), and gated recurrent networks \cite{Tai2017VirtualtorealDR, Xu2022BenchmarkingRL, Chiang2018LearningNB}. Furthermore, the end-to-end visual navigation does not require a planning process but only the determination of the point goals from the visual observations. In contrast, the methods that utilize model-free RL accomplish global exploration with explicit mapping with R-CNN and fast matching for path planning \cite{Anderson2017VisionandLanguageNI, Zhu2016TargetdrivenVN, Kahn2017SelfSupervisedDR, Wijmans2019DDPPOLN}. %to see verify references
 	
 	Research on Unmanned Aerial Vehicles (UAV) and Autonomous Underwater Vehicles (AUV) has explored diverse DRL methods to meet their high accuracy demands in decision-making and safety. In AUV, it leverages the visual domain randomization for zero-shot that is applied in sim-to-real transfer and implements the model-free in the agile aerial navigation of drone racing \cite{ Romero2023ActorCriticMP, Hadi2022DeepRL}.
 	
@@ -371,6 +370,10 @@
 	%Recently, researchers have implemented this approach in AUVs using the off-policy model-free soft actor-critic algorithm with the proximal policy optimization 
 	Off-policy methods such as SAC \cite{Romero2023ActorCriticMP} and PPO \cite{Wijmans2023EmergenceOM} have been implemented in UAVs
 	to maintain straight-line swimming trajectories in turbulent waters.
+	
+	
+	Certain navigation architectures operate without using DRL, as in \cite{Vorbach2021CausalNB}, which uses Liquid Time-Constant Networks (LTCs) to take into account distribution shift, occlusion, or closed-loop interactions between the controller, the environment and the actions, or the Fast-LiDARNet \cite{Liu2021EfficientAR} that introduces the Hybrid Evidential Fusion and demonstrates strong robustness to out-of-distribution events. In \cite{Quach2024GaussianST}, the authors combine 3D Gaussian Splatting to render images with LTCs to handle irregularly sampled data typically encountered in sim-to-real transfer pipelines.
+	
 	
 	\subsection{Planning and perception with DRL}
 	\begin{figure}[t]
